@@ -1,0 +1,750 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="使用 thinkphp 框架来实现一个登录功能新建控制器引入tp, 配置 application 目录; 新建控制器LoginController.class.php,  12345678910111213141516171819&amp;lt;?php namespace Home\Controller;use Think\Controller;use Think\Verify;class LoginC">
+<meta name="keywords" content="php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tp实现登录功能">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/tp实现登录功能/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="使用 thinkphp 框架来实现一个登录功能新建控制器引入tp, 配置 application 目录; 新建控制器LoginController.class.php,  12345678910111213141516171819&amp;lt;?php namespace Home\Controller;use Think\Controller;use Think\Verify;class LoginC">
+<meta property="og:updated_time" content="2017-06-20T11:53:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tp实现登录功能">
+<meta name="twitter:description" content="使用 thinkphp 框架来实现一个登录功能新建控制器引入tp, 配置 application 目录; 新建控制器LoginController.class.php,  12345678910111213141516171819&amp;lt;?php namespace Home\Controller;use Think\Controller;use Think\Verify;class LoginC">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/20/tp实现登录功能/"/>
+
+
+
+
+
+  <title>tp实现登录功能 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/20/tp实现登录功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">tp实现登录功能</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T17:09:18+08:00">
+                2017-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php开发/" itemprop="url" rel="index">
+                    <span itemprop="name">php开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="使用-thinkphp-框架来实现一个登录功能"><a href="#使用-thinkphp-框架来实现一个登录功能" class="headerlink" title="使用 thinkphp 框架来实现一个登录功能"></a>使用 thinkphp 框架来实现一个登录功能</h2><h3 id="新建控制器"><a href="#新建控制器" class="headerlink" title="新建控制器"></a>新建控制器</h3><p>引入tp, 配置 application 目录; 新建控制器<code>LoginController.class.php</code>, </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line">namespace Home\Controller;</div><div class="line">use Think\Controller;</div><div class="line">use Think\Verify;</div><div class="line"></div><div class="line">class LoginController extends Controller&#123;</div><div class="line">	function login()</div><div class="line">	 &#123;</div><div class="line">	 	//如果提交参数不为空, 进行验证数据;</div><div class="line">		if(!empty($_POST))&#123;</div><div class="line">			#TODO 1: 验证数据</div><div class="line">			#TODO 2: 验证码</div><div class="line">		&#125;else&#123;</div><div class="line">			$this-&gt;display();</div><div class="line">		&#125;	</div><div class="line">	 &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a> 
+<h3 id="新建模板文件"><a href="#新建模板文件" class="headerlink" title="新建模板文件"></a>新建模板文件</h3><p>新建模板文件, <code>login.html</code>, 设置表单内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> &lt;form class=&quot;am-form&quot; action=&quot;__SELF__&quot; method=&quot;post&quot;&gt;</div><div class="line">    &lt;label for=&quot;username&quot;&gt;用户名:&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;text&quot; name=&quot;username&quot;value=&quot;&quot;&gt;</div><div class="line">    &lt;br&gt;</div><div class="line">    &lt;label for=&quot;password&quot;&gt;密码:&lt;/label&gt;</div><div class="line">    &lt;input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot;&gt;</div><div class="line"></div><div class="line">&lt;!--&lt;input type=&quot;text&quot; name=&quot;imgcode&quot; placeholder=&quot;验证码&quot;&gt; </div><div class="line">&lt;img src=&quot;&#123;:U(&apos;Login/vryImg&apos;,array())&#125;&quot; alt=&quot;验证码&quot; height=&quot;80px&quot; width=&quot;220px&quot;&gt;</div><div class="line">--&gt;</div><div class="line">        </div><div class="line">    &lt;br /&gt;</div><div class="line"> &lt;button   type=&quot;submit&quot;&gt;登录&lt;/button&gt;</div><div class="line">  &lt;/form&gt;</div></pre></td></tr></table></figure>
+<p>点击登录按钮, 系统会将 form 表单中的信息作为参数加到<code>FormData</code>中, 在控制器中, 判断如果 <code>$_POST</code> 中含有参数, 进行判断, 在控制器的 <code>login</code> 方法中的 TODO1 下面添加如下代码: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$userpsw = array(</div><div class="line">    &apos;username&apos;=&gt;$_POST[&apos;username&apos;],</div><div class="line">    &apos;password&apos;=&gt;$_POST[&apos;password&apos;],</div><div class="line">    );</div><div class="line">    </div><div class="line">$info = D(&apos;userinfo&apos;)-&gt;where($userpsw)-&gt;find();</div><div class="line"></div><div class="line">if ($info)&#123;</div><div class="line">    echo &apos;登陆成功&apos;;</div><div class="line">&#125;else&#123;</div><div class="line">    echo &apos;登录失败&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="添加验证码"><a href="#添加验证码" class="headerlink" title="添加验证码"></a>添加验证码</h3><p>tp 中集成了 <code>Verify</code> 模块能快速的成成验证码<br>在第一段代码中的 <code>login</code> 方法代码修改如下, 在添加一个 <code>vryImg</code> 的方法用来生成验证码的图片:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">public function login()&#123;</div><div class="line"></div><div class="line">if (!empty($_POST))&#123;</div><div class="line">    $vry = new Verify();</div><div class="line"></div><div class="line">    if ($vry-&gt;check($_POST[&apos;imgcode&apos;]))&#123;</div><div class="line"></div><div class="line">        $userpsw = array(</div><div class="line">            &apos;username&apos;=&gt;$_POST[&apos;username&apos;],</div><div class="line">            &apos;password&apos;=&gt;$_POST[&apos;password&apos;],</div><div class="line">        );</div><div class="line">        $info = D(&apos;userinfo&apos;)-&gt;where($userpsw)-&gt;find();</div><div class="line"></div><div class="line">        if ($info)&#123;</div><div class="line">            echo &apos;登陆成功&apos;;</div><div class="line">        &#125;else&#123;</div><div class="line">            echo &apos;登录失败&apos;;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;else&#123;</div><div class="line">        echo &apos;验证码错误&apos;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	&#125;else&#123;</div><div class="line">	    $this-&gt;display();</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function  vryImg()&#123;</div><div class="line">	//验证码的配置</div><div class="line">	$cfg = array(</div><div class="line">	    &apos;imageH&apos;=&gt; 40,</div><div class="line">	    &apos;imageW&apos;=&gt;100,</div><div class="line">	    &apos;fontSize&apos;=&gt;15,</div><div class="line">	    &apos;length&apos;=&gt;4,</div><div class="line">	    &apos;fontttf&apos;=&gt;&apos;4.ttf&apos;,</div><div class="line">	);</div><div class="line">	$vry = new \Think\ Verify($cfg);</div><div class="line">	$vry-&gt;entry();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 <code>Verify</code> 模块中,有一个配置参数 <code>$config</code> 是设置验证码图片格式以及验证码复杂度, 可以在实例化<code>Verify</code>对象的时候将配置作为参数传递进去, 模块还提供了 <code>check</code>方法用来校验验证码,可以用这个方法来校验验证码是否输入正确, </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/20/e4-bd-bf-e7-94-a8thinkphp-e5-92-8c-jquery-e5-ae-9e-e7-8e-b0-e7-99-bb-e5-bd-95/" rel="next" title="使用thinkphp 和 jquery 实现登录">
+                <i class="fa fa-chevron-left"></i> 使用thinkphp 和 jquery 实现登录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/21/使用thinkphp分页/" rel="prev" title="使用thinkphp分页&上传图片">
+                使用thinkphp分页&上传图片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-thinkphp-框架来实现一个登录功能"><span class="nav-number">1.</span> <span class="nav-text">使用 thinkphp 框架来实现一个登录功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建控制器"><span class="nav-number">1.1.</span> <span class="nav-text">新建控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建模板文件"><span class="nav-number">1.2.</span> <span class="nav-text">新建模板文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加验证码"><span class="nav-number">1.3.</span> <span class="nav-text">添加验证码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

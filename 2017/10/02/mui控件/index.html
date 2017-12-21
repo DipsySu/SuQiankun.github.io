@@ -1,0 +1,798 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="muiUI控件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="mui 是一款最接近原生App体验的高性能前端框架, 性能上避免了浏览器切页白屏,卡顿的转场动画,视觉上定制了很多精美漂亮类似安卓和iOS原生的基础控件; 比如原生控件库中存在的 accordion 折叠面板 , actionsheet 操作表,     badges 数字角标 , button 定制按钮 ,  cardview 卡片视图 等系列基础控件">
+<meta name="keywords" content="muiUI控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mui控件(一)">
+<meta property="og:url" content="http://yoursite.com/2017/10/02/mui控件/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="mui 是一款最接近原生App体验的高性能前端框架, 性能上避免了浏览器切页白屏,卡顿的转场动画,视觉上定制了很多精美漂亮类似安卓和iOS原生的基础控件; 比如原生控件库中存在的 accordion 折叠面板 , actionsheet 操作表,     badges 数字角标 , button 定制按钮 ,  cardview 卡片视图 等系列基础控件">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/FgIBxeakBY5fEWYQRFEHFQeNz5Bv">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/FlybZuY4F-KeNZaqBJNyJyP2zsN2">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/FsqVrch9jTq3hw2Glkv9gXbmf_jH">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/FqHpDTEpfGAMl4i_D4neFSekeTNc">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/FpMoflEFeuyIkFcjFhXOiePNslhg">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/Fk2WsqKqTCh-HWYtTUvQxcy-cubA">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/Fnyzw9tSt84chaQkdVszA60Nm1-U">
+<meta property="og:updated_time" content="2017-10-02T11:21:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mui控件(一)">
+<meta name="twitter:description" content="mui 是一款最接近原生App体验的高性能前端框架, 性能上避免了浏览器切页白屏,卡顿的转场动画,视觉上定制了很多精美漂亮类似安卓和iOS原生的基础控件; 比如原生控件库中存在的 accordion 折叠面板 , actionsheet 操作表,     badges 数字角标 , button 定制按钮 ,  cardview 卡片视图 等系列基础控件">
+<meta name="twitter:image" content="http://7xujya.com1.z0.glb.clouddn.com/FgIBxeakBY5fEWYQRFEHFQeNz5Bv">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/02/mui控件/"/>
+
+
+
+
+
+  <title>mui控件(一) | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/mui控件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">mui控件(一)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T13:55:12+08:00">
+                2017-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/混合开发/" itemprop="url" rel="index">
+                    <span itemprop="name">混合开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>mui 是一款最接近原生App体验的高性能前端框架, 性能上避免了浏览器切页白屏,卡顿的转场动画,视觉上定制了很多精美漂亮类似安卓和iOS原生的基础控件;</p>
+<p>比如原生控件库中存在的 <code>accordion 折叠面板</code> , <code>actionsheet 操作表</code>,     <code>badges 数字角标</code> , <code>button 定制按钮</code> ,  <code>cardview 卡片视图</code> 等系列基础控件</p>
+<a id="more"></a>
+<p>还有一些窗口管理, 事件管理,  Ajax数据交互, 上下拉刷新,还有使用navigate.js对手机硬件功能进行调用;</p>
+<p>这里介绍一下系统的原生UI仓库, mui的ui控件库是以iOS7为基础,补充部分Android的特有空间,并在此基础上封装常用的js函数,方便开发人员进行调用;</p>
+<p>UI组件库:</p>
+<h4 id="折叠面板"><a href="#折叠面板" class="headerlink" title="折叠面板"></a>折叠面板</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 可以在折叠面板总放置表单, 图片轮播,图文混排等内容 --&gt;	</div><div class="line">	 &lt;ul class=&quot;mui-table-view&quot;&gt; </div><div class="line">        &lt;li class=&quot;mui-table-view-cell mui-collapse&quot;&gt;</div><div class="line">            &lt;a class=&quot;mui-navigate-right&quot; href=&quot;#&quot;&gt;许巍&lt;/a&gt;</div><div class="line">            &lt;div class=&quot;mui-collapse-content&quot;&gt;</div><div class="line">                &lt;p&gt;空谷幽兰&lt;/p&gt; &lt;br /&gt;</div><div class="line">                &lt;p&gt;世外桃源&lt;/p&gt; &lt;br /&gt;</div><div class="line">                &lt;p&gt;少年&lt;/p&gt;&lt;br /&gt;</div><div class="line">                &lt;p&gt;故乡&lt;/p&gt;&lt;br /&gt;</div><div class="line">                &lt;p&gt;蓝莲花&lt;/p&gt;&lt;br /&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/FgIBxeakBY5fEWYQRFEHFQeNz5Bv" alt="折叠面板样式"></p>
+<h4 id="操作表"><a href="#操作表" class="headerlink" title="操作表"></a>操作表</h4><p>actionsheet 一般是从底部弹出显示一系列可供用户选择的操作按钮； actionsheet是从popover控件基础上演变而来，实际上就是一个固定从底部弹出的popover，故DOM结构和popove类似，只是需要在含.mui-popover类的节点上增加.mui-popover-bottom、.mui-popover-action类；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;!--使用h5模式的actionsheet--&gt;</div><div class="line"></div><div class="line">&lt;p&gt;</div><div class="line">	&lt;a href=&quot;#picture&quot; class=&quot;mui-btn mui-btn-primary mui-btn-block mui-btn-outlined&quot; style=&quot;padding: 5px 20px;&quot;&gt;打开actionsheet&lt;/a&gt;</div><div class="line">&lt;/p&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;div id=&quot;picture&quot; class=&quot;mui-popover mui-popover-action mui-popover-bottom&quot;&gt;</div><div class="line">			&lt;ul class=&quot;mui-table-view&quot;&gt;</div><div class="line">				&lt;li class=&quot;mui-table-view-cell&quot;&gt;</div><div class="line">					&lt;a href=&quot;#&quot;&gt;拍照或录像&lt;/a&gt;</div><div class="line">				&lt;/li&gt;</div><div class="line">				&lt;li class=&quot;mui-table-view-cell&quot;&gt;</div><div class="line">					&lt;a href=&quot;#&quot;&gt;选取现有的&lt;/a&gt;</div><div class="line">				&lt;/li&gt;</div><div class="line">			&lt;/ul&gt;</div><div class="line">			&lt;ul class=&quot;mui-table-view&quot;&gt;</div><div class="line">				&lt;li class=&quot;mui-table-view-cell&quot;&gt;</div><div class="line">					&lt;a href=&quot;#picture&quot;&gt;&lt;b&gt;取消&lt;/b&gt;&lt;/a&gt;</div><div class="line">				&lt;/li&gt;</div><div class="line">			&lt;/ul&gt;</div><div class="line">		&lt;/div&gt;</div><div class="line">		</div><div class="line"></div><div class="line">/*</div><div class="line">可通过css自由定制展现样式</div><div class="line">另一方面，H5模式的actionsheet也具备如下缺点:</div><div class="line">	不支持覆盖顶部状态栏</div><div class="line">	不支持跨webview的遮罩</div><div class="line">	在有map等原生组件时，容易被遮挡</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/FlybZuY4F-KeNZaqBJNyJyP2zsN2" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;!--使用h5+模式actionsheet--&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;p&gt;</div><div class="line">	&lt;a id=&quot;picture-btn&quot; class=&quot;mui-btn mui-btn-primary mui-btn-block mui-btn-outlined&quot; style=&quot;padding: 5px 20px;&quot;&gt;打开actionsheet&lt;/a&gt;</div><div class="line">&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;div&gt;	&lt;p id=&quot;info&quot;&gt;&lt;/p&gt; &lt;/div&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line">var info = document.getElementById(&quot;info&quot;);</div><div class="line">document.getElementById(&quot;picture-btn&quot;).addEventListener(&apos;tap&apos;,function () &#123;</div><div class="line">	var btnArray = [&#123;title:&quot;拍照或录像&quot;&#125;,&#123;title:&quot;选取现有的&quot;&#125;];</div><div class="line">	plus.nativeUI.actionSheet( &#123;</div><div class="line">		title:&quot;选择照片&quot;,</div><div class="line">		cancel:&quot;取消&quot;,</div><div class="line">		buttons:btnArray</div><div class="line">	&#125;, function(e)&#123;</div><div class="line">		var index = e.index;</div><div class="line">		var text = &quot;你刚点击了\&quot;&quot;;</div><div class="line">		switch (index)&#123;</div><div class="line">			case 0:</div><div class="line">				text += &quot;取消&quot;;</div><div class="line">				break;</div><div class="line">			case 1:</div><div class="line">				text += &quot;拍照或录像&quot;;</div><div class="line">				break;</div><div class="line">			case 2:</div><div class="line">				text += &quot;选取现有的&quot;;</div><div class="line">				break;</div><div class="line">		&#125;</div><div class="line">		info.innerHTML = text+&quot;\&quot;按钮&quot;;</div><div class="line">	&#125; );</div><div class="line">&#125;);</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">/*</div><div class="line">可通过css自由定制展现样式</div><div class="line">另一方面，H5模式的actionsheet也具备如下缺点:</div><div class="line">	不支持覆盖顶部状态栏</div><div class="line">	不支持跨webview的遮罩</div><div class="line">	在有map等原生组件时，容易被遮挡</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/FsqVrch9jTq3hw2Glkv9gXbmf_jH" alt=""></p>
+<h4 id="数字角标"><a href="#数字角标" class="headerlink" title="数字角标"></a>数字角标</h4><p>mui 使用自定义css样式创建了许多好看的数字角标 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;mui-content&quot;&gt;</div><div class="line">			&lt;div class=&quot;mui-content-padded&quot;&gt;</div><div class="line">				&lt;h5&gt;有底色&lt;/h5&gt;</div><div class="line">				&lt;span class=&quot;mui-badge&quot;&gt;1&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-primary&quot;&gt;12&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-success&quot;&gt;123&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-warning&quot;&gt;3&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-danger&quot;&gt;45&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-purple&quot;&gt;456&lt;/span&gt;</div><div class="line">				&lt;h5&gt;无底色（使用父元素背景色）&lt;/h5&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-inverted&quot;&gt;1&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-primary mui-badge-inverted&quot;&gt;2&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-success mui-badge-inverted&quot;&gt;3&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-warning mui-badge-inverted&quot;&gt;4&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-danger mui-badge-inverted&quot;&gt;5&lt;/span&gt;</div><div class="line">				&lt;span class=&quot;mui-badge mui-badge-royal mui-badge-inverted&quot;&gt;6&lt;/span&gt;</div><div class="line">			&lt;/div&gt;</div><div class="line">		&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/FqHpDTEpfGAMl4i_D4neFSekeTNc" alt="数字角标"></p>
+<h4 id="按钮"><a href="#按钮" class="headerlink" title="按钮"></a>按钮</h4><p>mui默认按钮为灰色，另外还提供了蓝色（blue）、绿色(green)、黄色(yellow)、红色(red)、紫色(purple)五种色系的按钮，五种色系对应五种场景，分别为primary、success、warning、danger、royal；使用.mui-btn类即可生成一个默认按钮，继续添加.mui-btn-颜色值或.mui-btn-场景可生成对应色系的按钮，例如：通过.mui-btn-blue或.mui-btn-primary均可生成蓝色按钮</p>
+<h5 id="普通按钮"><a href="#普通按钮" class="headerlink" title="普通按钮"></a>普通按钮</h5><p>在button节点上增加.mui-btn类，即可生成默认按钮；若需要其他颜色的按钮，则继续增加对应class即可，比如.mui-btn-blue即可变成蓝色按钮</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 有底色的按钮 --&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn&quot;&gt;默认&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-primary&quot;&gt;蓝色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-success&quot;&gt;绿色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-warning&quot;&gt;黄色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-danger&quot;&gt;红色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-royal&quot;&gt;紫色&lt;/button&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/FpMoflEFeuyIkFcjFhXOiePNslhg" alt="有底色的按钮"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 无底色的按钮 --&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-outlined&quot;&gt;默认&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-primary mui-btn-outlined&quot;&gt;蓝色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-success mui-btn-outlined&quot;&gt;绿色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-warning mui-btn-outlined&quot;&gt;黄色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-danger mui-btn-outlined&quot;&gt;红色&lt;/button&gt;</div><div class="line">&lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-royal mui-btn-outlined&quot;&gt;紫色&lt;/button&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/Fk2WsqKqTCh-HWYtTUvQxcy-cubA" alt="无底色的按钮"></p>
+<h5 id="加载按钮"><a href="#加载按钮" class="headerlink" title="加载按钮"></a>加载按钮</h5><p>mui v3.4 版新增加载中按钮样式,目前提供通过 JS API 切换 loading和reset状态,可以灵活操作适应多种场景</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data-loading-text</td>
+<td>loading状态下显示的文字,默认为loading</td>
+<td></td>
+</tr>
+<tr>
+<td>data-loading-icon</td>
+<td>loading状态显示为icon,默认是 <code>mui-spinner</code> 或者 `mui-spinner mui-spinnner-white</td>
+<td></td>
+</tr>
+<tr>
+<td>data-loading-icon-position</td>
+<td>loading状态下现实的icon的位置, 支持left/right. 默认是left</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;!-- loading 状态下的按钮 --&gt;</div><div class="line"></div><div class="line">&lt;h5&gt;左侧loading图标：&lt;/h5&gt;</div><div class="line">    &lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-primary&quot; &gt;确认&lt;/button&gt;</div><div class="line">    &lt;h5&gt;右侧loading图标：&lt;/h5&gt;</div><div class="line">    &lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-primary&quot; data-loading-text = &quot;提交中&quot; data-loading-icon-position=&quot;right&quot;&gt;确认&lt;/button&gt;</div><div class="line">    &lt;h5&gt;无loading图标：&lt;/h5&gt;</div><div class="line">    &lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-primary&quot; data-loading-icon=&quot;&quot;&gt;确认&lt;/button&gt;</div><div class="line">    &lt;h5&gt;自定义loading图标：&lt;/h5&gt;</div><div class="line">    &lt;button type=&quot;button&quot; class=&quot;mui-btn mui-btn-primary&quot; data-loading-icon=&quot;mui-spinner mui-spinner-custom&quot;&gt;确认&lt;/button&gt;</div><div class="line">    </div><div class="line">&lt;!--     使用jsApi --&gt; </div><div class="line"></div><div class="line">mui.(btn).button(&apos;loading);  // 切换为 loading 状态</div><div class="line"></div><div class="line">mui.(btn).button(&apos;reset);  // 切换为 reset 状态</div><div class="line"></div><div class="line">&lt;script&gt; </div><div class="line">mui(document.body).on(&apos;tap&apos;,&apos;.mui-btn&apos;,function()&#123;</div><div class="line">	mui.(this).button(&quot;loading&apos;);</div><div class="line">	setTimeout(function()&#123;</div><div class="line">		mui(this).button(&apos;reset);</div><div class="line">	&#125;.bind(this),2000);</div><div class="line"></div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/Fnyzw9tSt84chaQkdVszA60Nm1-U" alt="带loading状态的按钮"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/muiUI控件/" rel="tag"># muiUI控件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/09/iOS奇巧淫技/" rel="next" title="iOS奇巧淫技">
+                <i class="fa fa-chevron-left"></i> iOS奇巧淫技
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/03/mui控件-1/" rel="prev" title="mui控件(二)">
+                mui控件(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#折叠面板"><span class="nav-number">1.</span> <span class="nav-text">折叠面板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作表"><span class="nav-number">2.</span> <span class="nav-text">操作表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数字角标"><span class="nav-number">3.</span> <span class="nav-text">数字角标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按钮"><span class="nav-number">4.</span> <span class="nav-text">按钮</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#普通按钮"><span class="nav-number">4.1.</span> <span class="nav-text">普通按钮</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载按钮"><span class="nav-number">4.2.</span> <span class="nav-text">加载按钮</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

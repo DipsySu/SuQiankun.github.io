@@ -1,0 +1,787 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="修改UITextField文本输入框中的clearButton小图片  123456// 获取X按钮UIButton *passwordBtn = [_passwordField valueForKey:@&amp;quot;_clearButton&amp;quot;];// 修改按钮图片[passwordBtn setImage:[UIImage imageNamed:@&amp;quot;login_checkb">
+<meta name="keywords" content="iOS开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS奇巧淫技">
+<meta property="og:url" content="http://yoursite.com/2017/08/09/iOS奇巧淫技/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="修改UITextField文本输入框中的clearButton小图片  123456// 获取X按钮UIButton *passwordBtn = [_passwordField valueForKey:@&amp;quot;_clearButton&amp;quot;];// 修改按钮图片[passwordBtn setImage:[UIImage imageNamed:@&amp;quot;login_checkb">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/FuOcZNzfkfFuC_rVQMnmCG95Ijqi">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/Fpbs0_lUW_ZxtYRFtHuNZZoyuD1k">
+<meta property="og:image" content="http://7xujya.com1.z0.glb.clouddn.com/Ft7pS5m_K48Byusb7Rjqo7lGHjsS">
+<meta property="og:updated_time" content="2017-08-09T03:10:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS奇巧淫技">
+<meta name="twitter:description" content="修改UITextField文本输入框中的clearButton小图片  123456// 获取X按钮UIButton *passwordBtn = [_passwordField valueForKey:@&amp;quot;_clearButton&amp;quot;];// 修改按钮图片[passwordBtn setImage:[UIImage imageNamed:@&amp;quot;login_checkb">
+<meta name="twitter:image" content="http://7xujya.com1.z0.glb.clouddn.com/FuOcZNzfkfFuC_rVQMnmCG95Ijqi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/09/iOS奇巧淫技/"/>
+
+
+
+
+
+  <title>iOS奇巧淫技 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/iOS奇巧淫技/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS奇巧淫技</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-09T10:10:48+08:00">
+                2017-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>修改UITextField文本输入框中的clearButton小图片</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 获取X按钮</div><div class="line">UIButton *passwordBtn = [_passwordField valueForKey:@&quot;_clearButton&quot;];</div><div class="line">// 修改按钮图片</div><div class="line">[passwordBtn setImage:[UIImage imageNamed:@&quot;login_checkbox_checked&quot;] forState:UIControlStateNormal];</div><div class="line">UIButton *accountBtn = [_accountField valueForKey:@&quot;_clearButton&quot;];</div><div class="line">[accountBtn setImage:[UIImage imageNamed:@&quot;login_checkbox_checked&quot;] forState:UIControlStateNormal];</div></pre></td></tr></table></figure>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/FuOcZNzfkfFuC_rVQMnmCG95Ijqi" alt=""></p>
+<ul>
+<li>tableview不想显示没有内容的cell </li>
+</ul>
+<p><code>self.tableview.tablefooterview = [UIView new];</code></p>
+<ul>
+<li>自定义了leftBarbuttonItem左滑返回手势失效了怎么办?</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]</div><div class="line">                                         initWithImage:img</div><div class="line">                                         style:UIBarButtonItemStylePlain</div><div class="line">                                         target:self</div><div class="line">                                         action:@selector(onBack:)];</div><div class="line">self.navigationController.interactivePopGestureRecognizer.delegate = (id&lt;UIGestureRecognizerDelegate&gt;)self;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>ScrollView在viewController终不能滑到顶</li>
+</ul>
+<p><code>self.automaticallyAdjustsScrollViewInsets = NO;</code></p>
+<ul>
+<li>写键盘事件让你不爽了</li>
+</ul>
+<p><code>github搜索 IQKeyboardManger</code></p>
+<ul>
+<li>怎么在不新建一个cell的情况下调整separaLine的位置?</li>
+</ul>
+<p><code>self.tableview.separatorinset = UIEdgeInsetMake(0,100,0,0)</code></p>
+<ul>
+<li>点击self.view 就收起键盘</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event</div><div class="line">&#123;</div><div class="line">   [self.view endEditing:YES];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>滑动的时候隐藏navigationbar?</li>
+</ul>
+<p><code>navigationController.hidesBarsonSwipe = YES</code></p>
+<ul>
+<li>ViewController 实现tableview那种悬停header</li>
+</ul>
+<p><code>CSStickyHeaderFlowLayout</code></p>
+<ul>
+<li>CoreData用来不爽?</li>
+</ul>
+<p><code>MagicalRecord</code> </p>
+<ul>
+<li>修改UITextField placeholder的文字颜色&amp;位置 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (void) drawPlaceholderInRect:(CGRect)rect &#123;</div><div class="line"></div><div class="line">[[UIColor blueColor] setFill]; </div><div class="line">[self.placeholder drawInRect:rect withFont:self.font lineBreakMode:UILineBreakModeTailTruncation alignment:self.textAlignment]; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>navigationbar弄成透明的而不是带模糊的效果? </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[self.navigationBar setBackgroundImage:[UIImage new] 	forBarMetrics:UIBarMetricsDefault];</div><div class="line"></div><div class="line">self.navigationBar.shadowImage = [UIImage new]; </div><div class="line"></div><div class="line">self.navigationBar.translucent = YES;</div></pre></td></tr></table></figure>
+<ul>
+<li>修改tableview里面cell的小对勾颜色 </li>
+</ul>
+<p><code>tableview.tintcolor = [uicolor redcolor]</code></p>
+<ul>
+<li>使用一个pan手势来代替UISwipegesture各个方向</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (void)pan:(UIPanGestureRecognizer *)sender</div><div class="line">&#123;</div><div class="line"></div><div class="line">typedef NS_ENUM(NSUInteger, UIPanGestureRecognizerDirection) &#123;</div><div class="line">    UIPanGestureRecognizerDirectionUndefined,</div><div class="line">    UIPanGestureRecognizerDirectionUp,</div><div class="line">    UIPanGestureRecognizerDirectionDown,</div><div class="line">    UIPanGestureRecognizerDirectionLeft,</div><div class="line">    UIPanGestureRecognizerDirectionRight</div><div class="line">&#125;;</div><div class="line"></div><div class="line">static UIPanGestureRecognizerDirection direction = UIPanGestureRecognizerDirectionUndefined;</div><div class="line"></div><div class="line">switch (sender.state) &#123;</div><div class="line"></div><div class="line">    case UIGestureRecognizerStateBegan: &#123;</div><div class="line"></div><div class="line">        if (direction == UIPanGestureRecognizerDirectionUndefined) &#123;</div><div class="line"></div><div class="line">            CGPoint velocity = [sender velocityInView:recognizer.view];</div><div class="line"></div><div class="line">            BOOL isVerticalGesture = fabs(velocity.y) &gt; fabs(velocity.x);</div><div class="line"></div><div class="line">            if (isVerticalGesture) &#123;</div><div class="line">                if (velocity.y &gt; 0) &#123;</div><div class="line">                    direction = UIPanGestureRecognizerDirectionDown;</div><div class="line">                &#125; else &#123;</div><div class="line">                    direction = UIPanGestureRecognizerDirectionUp;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            else &#123;</div><div class="line">                if (velocity.x &gt; 0) &#123;</div><div class="line">                    direction = UIPanGestureRecognizerDirectionRight;</div><div class="line">                &#125; else &#123;</div><div class="line">                    direction = UIPanGestureRecognizerDirectionLeft;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        break;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    case UIGestureRecognizerStateChanged: &#123;</div><div class="line">        switch (direction) &#123;</div><div class="line">            case UIPanGestureRecognizerDirectionUp: &#123;</div><div class="line">                [self handleUpwardsGesture:sender];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case UIPanGestureRecognizerDirectionDown: &#123;</div><div class="line">                [self handleDownwardsGesture:sender];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case UIPanGestureRecognizerDirectionLeft: &#123;</div><div class="line">                [self handleLeftGesture:sender];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case UIPanGestureRecognizerDirectionRight: &#123;</div><div class="line">                [self handleRightGesture:sender];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            default: &#123;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        break;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    case UIGestureRecognizerStateEnded: &#123;</div><div class="line">        direction = UIPanGestureRecognizerDirectionUndefined;   </div><div class="line">        break;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    default:</div><div class="line">        break;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>图片拉伸</li>
+</ul>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/Fpbs0_lUW_ZxtYRFtHuNZZoyuD1k" alt="xib拉伸图片"></p>
+<p>在Storyboard或xib中拖入的控件都有Stretching属性，包含四个参数：X、Y、Width、Height。这些参数确定了进行拉伸的区域。<br>当X = Y = Width = Height = 1时，图片为原始大小。<br>若让X = Y = 0.5、Width = Height = 0，则按水平垂直位置的那个像素点进行拉伸，如图所示。</p>
+<p><img src="http://7xujya.com1.z0.glb.clouddn.com/Ft7pS5m_K48Byusb7Rjqo7lGHjsS" alt=""></p>
+<ul>
+<li>修改UISearchBar 的占位符文字颜色</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/**设置UISearchBar**/</div><div class="line">// 创建</div><div class="line">UISearchBar *searchBar = [[UISearchBar alloc] init];</div><div class="line">// 设置导航条背景色</div><div class="line">self.navigationController.navigationBar.barTintColor = [UIColor hollyGreenColor];</div><div class="line">// 风格</div><div class="line">searchBar.searchBarStyle = UISearchBarStyleMinimal;</div><div class="line">// 光标色</div><div class="line">searchBar.tintColor = [UIColor whiteColor];</div><div class="line">// 占位文字</div><div class="line">searchBar.placeholder = @&quot;搜索&quot;;</div><div class="line">// 设置占位文字色彩</div><div class="line">UITextField *searchField = [searchBar valueForKey:@&quot;searchField&quot;];</div><div class="line"></div><div class="line">[searchField setValue:[UIColor whiteColor] forKeyPath:@&quot;_placeholderLabel.textColor&quot;];</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS开发/" rel="tag"># iOS开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/08/自定义控件/" rel="next" title="自定义控件">
+                <i class="fa fa-chevron-left"></i> 自定义控件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/02/mui控件/" rel="prev" title="mui控件(一)">
+                mui控件(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

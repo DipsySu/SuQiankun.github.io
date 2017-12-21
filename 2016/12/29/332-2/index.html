@@ -1,0 +1,804 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在iOS开发新中经常会遇到在两个界面之间进行传值的情况,在页面之间进行数据传递有正向传递(控制器A跳转到控制器B),也有反向传值(控制器B跳转到A).可以通过属性,代理,block,通知等等.就解释一下怎么使用block和代理进行页面之间反向传值;">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS界面传值">
+<meta property="og:url" content="http://yoursite.com/2016/12/29/332-2/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="在iOS开发新中经常会遇到在两个界面之间进行传值的情况,在页面之间进行数据传递有正向传递(控制器A跳转到控制器B),也有反向传值(控制器B跳转到A).可以通过属性,代理,block,通知等等.就解释一下怎么使用block和代理进行页面之间反向传值;">
+<meta property="og:updated_time" content="2017-06-20T09:02:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS界面传值">
+<meta name="twitter:description" content="在iOS开发新中经常会遇到在两个界面之间进行传值的情况,在页面之间进行数据传递有正向传递(控制器A跳转到控制器B),也有反向传值(控制器B跳转到A).可以通过属性,代理,block,通知等等.就解释一下怎么使用block和代理进行页面之间反向传值;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/29/332-2/"/>
+
+
+
+
+
+  <title>iOS界面传值 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/332-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS界面传值</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T13:18:54+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS-开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在iOS开发新中经常会遇到在两个界面之间进行传值的情况,在页面之间进行数据传递有正向传递(控制器A跳转到控制器B),也有反向传值(控制器B跳转到A).可以通过属性,代理,block,通知等等.<br>就解释一下怎么使用block和代理进行页面之间反向传值;<br><a id="more"></a></p>
+<a id="more"></a>
+<p>使用block进行反向传值</p>
+<p>在Xcode中创建新的项目</p>
+<p>创建两个控制器A,B.<br>在A控制器中添加一个按钮,对按钮添加点击跳转到B控制器,然后再A中再次添加一个label,作为接受B控制器中传回来的值.<br>在B控制器中创建一个UITextField,用于输入信息.<br>在A控制器中.m文件中代码如下:</p>
+<blockquote>
+<p>&nbsp;</p>
+<p>[objc]</p>
+<p>//<br>// ViewController.m<br>// 反向传值<br>//<br>// Created by 两好三坏 on 16/3/3.<br>// Copyright © 2016年 qinakun. All rights reserved.<br>//</p>
+<p>#import “ViewController.h”</p>
+<p>使用block传值的控制器</p>
+<p>#import “BlockVC.h”</p>
+<p>使用delegate传值的控制器</p>
+<p>#import “DelegateVC.h”</p>
+<p>@interface ViewController ()<br>//用于接受数据的label<br>@property (weak, nonatomic) IBOutlet UILabel *inputLabel;</p>
+<p>@end</p>
+<p>@implementation ViewController</p>
+<ul>
+<li>(void)viewDidLoad {<br>[super viewDidLoad];<br>}</li>
+</ul>
+<p>//跳转控制器的</p>
+<ul>
+<li>(IBAction)jumpVC:(id)sender {<br>//调用block进行传值<br>// [self block];<br>//调用bdelegate进行传值<br>[self delegate];<br>}</li>
+</ul>
+<p>//使用block进行反向传值<br>-(void)block{</p>
+<p>UIStoryboard *sb = [UIStoryboard storyboardWithName:@”BlockSB” bundle:nil];</p>
+<p>BlockVC *blockVc = [sb instantiateViewControllerWithIdentifier:@”blockVC”];</p>
+<p>//inputBlock是定义好的block</p>
+<p>[blockVc setInputBlock:^(NSString *string) {<br>//在这里对A控制器的label进行设置,这个string参数是从B控制器中传过来的;<br>self.inputLabel.text = string;<br>}];</p>
+<p>[self.navigationController pushViewController:blockVc animated:YES];</p>
+<p>}</p>
+<p>//使用delegate进行反向传值<br>-(void)delegate{</p>
+<p>DelegateVC *vc = [DelegateVC new];<br>//需要让控制器A成为控制器B的代理.<br>vc.delegate = self;<br>[self.navigationController pushViewController:vc animated:YES];<br>}</p>
+<p>//代理方法中给input进行传值<br>-(void)changeValue:(NSString *)string{<br>self.inputLabel.text = string;<br>}</p>
+<p>@end</p>
+<p>[/objc]<br>接下来是在控制器B中定义一个ｂｌｏｃｋ的代码块，这个block的参数是字符串,在控制器B的.h文件中声明如下:<br>[objc]</p>
+<p>@property (nonatomic, copy) void (^inputBlock)(NSString *string);<br>控制器B的.m文件代码如下:</p>
+<p>#import “BlockVC.h”</p>
+<p>@interface BlockVC ()</p>
+<p>@property (weak, nonatomic) IBOutlet UITextView *input;</p>
+<p>@end</p>
+<p>@implementation BlockVC</p>
+<ul>
+<li>(void)viewDidLoad {<br>[super viewDidLoad];<br>}<br>//点击屏幕是输入框失去第一响应者的资格<br>-(void)touchesBegan:(NSSet <em>)touches withEvent:(UIEvent </em>)event{</li>
+</ul>
+<p>[self.input resignFirstResponder];</p>
+<p>}<br>//在控制器即将消失的时候调用,<br>-(void)viewWillDisappear:(BOOL)animated{<br>[super viewWillDisappear:animated];</p>
+<p>//取到输入框的内容保存在代码块中,在需要的时候将参数传给控制器A<br>if (self.inputBlock) {<br>self.inputBlock (self.input.text);<br>}</p>
+<p>}</p>
+<p>@end</p>
+<p>[/objc]<br>这样就算完成了一个简单的在两个页面之间进行反向传值的功能.</p>
+</blockquote>
+<p>使用delegate进行反向传值</p>
+<p>代理应用场景及使用步骤</p>
+<p>对象A内部发生了一些事情,想通知对象B</p>
+<p>对象B想监听对象A内部发生了什么事情</p>
+<p>对象A想在自己的方法内部调用对象B的某个方法,并且对象A不能对对象B有耦合依赖</p>
+<p>对象A想传递数据给对象B</p>
+<p>以上情况,结果都一样:对象B是对象A的代理(delegate)</p>
+<p>1.先搞清楚谁是谁的代理(delegate) 2.定义代理协议,协议名称的命名规范:控件类名 + Delegate 3.定义代理方法</p>
+<p>代理方法一般都定义为@optional<br>代理方法名都以控件名开头<br>代理方法至少有1个参数,将控件本身传递出去<br>设置代理(delegate)对象 (比如myView.delegate = xxxx;)<br>代理对象遵守协议<br>代理对象实现协议里面该实现的方法<br>在恰当的时刻调用代理对象(delegate)的代理方法,通知代理发生了什么事情<br>(在调用之前判断代理是否实现了该代理方法)</p>
+<p>这是代理的使用场景以及使用步骤,下面是使用delegate实现前面block实现的功能</p>
+<p>假如控制器C想利用代理给控制器A传值,那么</p>
+<p>控制器C要有一个协议<br>控制器要有一个代理属性<br>控制器A遵守C的代理协议,并且成为C的代理对象.<br>控制器C的.h文件中作出如下声明:</p>
+<blockquote>
+<p>[objc]</p>
+<p>//<br>// DelegateVC.h<br>// 反向传值<br>//<br>// Created by 两好三坏 on 16/3/5.<br>// Copyright © 2016年 qinakun. All rights reserved.<br>//</p>
+<p>#import &lt;UIKit/UIKit.h&gt;</p>
+<p>@class DelegateVC;<br>//协议<br>@protocol DelegateVCDelegate</p>
+<p>//A需要实现的代理方法<br>-(void)changeValue:(NSString *)string;</p>
+<p>@end</p>
+<p>@interface DelegateVC : UIViewController<br>//代理属性<br>@property(nonatomic,weak) iddelegate;</p>
+<p>@end</p>
+<p>[/objc]<br>然后在.m文件中代码:<br>[objc]</p>
+<p>//<br>// DelegateVC.m<br>// 反向传值<br>//<br>// Created by 两好三坏 on 16/3/5.<br>// Copyright © 2016年 qinakun. All rights reserved.<br>//</p>
+<p>#import “DelegateVC.h”</p>
+<p>#define kWidth [UIScreen mainScreen].bounds.size.width</p>
+<p>#define kHeight [UIScreen mainScreen].bounds.size.height</p>
+<p>@interface DelegateVC ()<br>@property(nonatomic,strong) UITextField *textValue;<br>@end</p>
+<p>@implementation DelegateVC</p>
+<ul>
+<li>(void)viewDidLoad {<br>[super viewDidLoad];<br>self.view.backgroundColor = [UIColor whiteColor];<br>创建一个输入框,添加到控制器C的view上;<br>UITextField _tf = [[UITextField alloc] init];<br>tf.backgroundColor = [UIColor grayColor];<br>tf.frame = CGRectMake(kWidth _0.5 - 50, kHeight * 0.5, 100, 40);</li>
+</ul>
+<p>self.textValue = tf;<br>[self.view addSubview:_textValue];</p>
+<p>}<br>//当控制器C消失的时候调用的方法<br>-(void)viewWillDisappear:(BOOL)animated{<br>[super viewWillDisappear:animated];<br>//如果有对象响应了代理,就执行if判断中的方法,<br>if ([self.delegate respondsToSelector:@selector(changeValue:)]) {<br>//把输入框中的text取出来作为代理方法的参数传送给控制器A<br>[self.delegate changeValue:self.textValue.text];<br>}</p>
+<p>}</p>
+<p>@end</p>
+<p>[/objc]<br>在页面中传值得方法有很多,使用通知,KVO,单例,还有偏好设置,归档解档都可以实现,看情况哪个方便就是用哪个咯….</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/328-2/" rel="next" title="iOS设计模式之单例">
+                <i class="fa fa-chevron-left"></i> iOS设计模式之单例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/aria2-e7-9a-84-e9-85-8d-e7-bd-ae-e4-b8-8e-e4-bd-bf-e7-94-a8/" rel="prev" title="Aria2的配置与使用">
+                Aria2的配置与使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

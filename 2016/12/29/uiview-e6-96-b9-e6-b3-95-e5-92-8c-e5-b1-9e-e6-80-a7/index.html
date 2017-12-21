@@ -1,0 +1,765 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="UIView的setNeedsDisplay和setNeedsLayout方法。首先两个方法都是异步执行的。setNeedsDisplay会调用自动调用drawRect方法，这样可以拿到UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，就可以处理子视图中的一些数据。">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIView方法和属性">
+<meta property="og:url" content="http://yoursite.com/2016/12/29/uiview-e6-96-b9-e6-b3-95-e5-92-8c-e5-b1-9e-e6-80-a7/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="UIView的setNeedsDisplay和setNeedsLayout方法。首先两个方法都是异步执行的。setNeedsDisplay会调用自动调用drawRect方法，这样可以拿到UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，就可以处理子视图中的一些数据。">
+<meta property="og:updated_time" content="2017-06-20T09:01:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIView方法和属性">
+<meta name="twitter:description" content="UIView的setNeedsDisplay和setNeedsLayout方法。首先两个方法都是异步执行的。setNeedsDisplay会调用自动调用drawRect方法，这样可以拿到UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，就可以处理子视图中的一些数据。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/29/uiview-e6-96-b9-e6-b3-95-e5-92-8c-e5-b1-9e-e6-80-a7/"/>
+
+
+
+
+
+  <title>UIView方法和属性 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/uiview-e6-96-b9-e6-b3-95-e5-92-8c-e5-b1-9e-e6-80-a7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">UIView方法和属性</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T11:02:23+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS-开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>UIView的setNeedsDisplay和setNeedsLayout方法。首先两个方法都是异步执行的。setNeedsDisplay会调用自动调用drawRect方法，这样可以拿到UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，就可以处理子视图中的一些数据。</p>
+<a id="more"></a>
+<p>综上两个方法都是异步执行的，layoutSubviews方便数据计算，drawRect方便视图重绘。</p>
+<p>先大概看下ios layout机制相关的这几个方法：</p>
+<ul>
+<li>(CGSize)sizeThatFits:(CGSize)size</li>
+<li><p>(void)sizeToFit<br>——————-</p>
+</li>
+<li><p>(void)layoutSubviews</p>
+</li>
+<li>(void)layoutIfNeeded</li>
+<li><p>(void)setNeedsLayout<br>——————–</p>
+</li>
+<li><p>(void)setNeedsDisplay</p>
+</li>
+<li><p>(void)drawRect<br>UIView自带的方法</p>
+</li>
+<li><p>(void)setNeedsLayout; (异步方法)</p>
+</li>
+<li>(void)layoutIfNeeded;(强制立即刷新)<br>一、<br>layoutSubviews在以下情况下会被调用：</li>
+</ul>
+<p>1、init初始化不会触发layoutSubviews。</p>
+<p>2、addSubview会触发layoutSubviews。</p>
+<p>3、设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化。</p>
+<p>4、滚动一个UIScrollView会触发layoutSubviews。</p>
+<p>5、旋转Screen会触发父UIView上的layoutSubviews事件。</p>
+<p>6、改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件。</p>
+<p>7、直接调用setLayoutSubviews。</p>
+<p>8、直接调用setNeedsLayout。</p>
+<p>在苹果的官方文档中强调:You should override this method only if the autoresizing behaviors of the subviews do not offer the behavior you want.</p>
+<p>layoutSubviews, 当我们在某个类的内部调整子视图位置时，需要调用。</p>
+<p>反过来的意思就是说：如果你想要在外部设置subviews的位置，就不要重写。</p>
+<p>从xib中加载UIView,<br><code>UIView *view = [[[NSBundle mainBundle]loadNibNamed: owner: options:]fristObject];</code><br>如果需要对view进行重绘,需要重写drewRect 或者强制刷新setDisplayIfNeed<br>刷新子对象布局</p>
+<p>-layoutSubviews方法：这个方法，默认没有做任何事情，需要子类进行重写</p>
+<p>-setNeedsLayout方法： 标记为需要重新布局，异步调用layoutIfNeeded刷新布局，不立即刷新，但layoutSubviews一定会被调用</p>
+<p>-layoutIfNeeded方法：如果，有需要刷新的标记，立即调用layoutSubviews进行布局（如果没有标记，不会调用layoutSubviews）</p>
+<p>如果要立即刷新，要先调用[view setNeedsLayout]，把标记设为需要布局，然后马上调用[view layoutIfNeeded]，实现布局</p>
+<p>在视图第一次显示之前，标记总是“需要刷新”的，可以直接调用[view layoutIfNeeded]</p>
+<p>1 UIView自带的方法<br>2 1&gt; - (void)layoutSubviews;<br>3 <em>当一个控件的frame发生改变的时候就会自动调用<br>4 </em>一般在这里布局内部的子控件(设置子控件的frame)<br>5 <em>一定要调用super的layoutSubviews方法<br>6<br>7 2&gt; - (void)didMoveToSuperview;<br>8 </em>当一个控件被添加到父控件中就会调用<br>9<br>10 3&gt; - (void)willMoveToSuperview:(UIView <em>)newSuperview;<br>11 </em>当一个控件即将被添加到父控件中会调用</p>
+<p>UIView的属性</p>
+<p>1.alpha(透明度)<br>设置视图的透明度，一般默认为１；</p>
+<p>view.alpha = 0; —&gt;完全透明,这种情况下view不能接受交互事件;<br>view.alpha = 1; —&gt;不透明,<br>2.clipsToBounds(是否裁剪)<br>默认情况是NO,设置为yes的时候,超出当前视图尺寸的内容和子视图不会显示,切圆角图片的时候会用到</p>
+<p>view.clipsToBounds = YES;<br>view.clipsToBounds = NO;<br>3.hidden(隐藏视图)<br>当设置为YES的时候视图就看不见了,可以用来做动画.</p>
+<p>4.userInteractionEnable(用户交互)<br>如果设置为NO,那么当前view和它的子控件就不能响应事件.imageView默认是关闭的</p>
+<p>5.exclusiveTouch<br>默认情况是NO,如果设置了exclusiveTouch的UIView是整个触摸时间的第一响应者,那么当你的所有手指离开屏幕前其他的UIView是无法接受整个事件周期内所有的触摸事件;</p>
+<p>6.CGRect frame center bounds<br>1.表示控件的位置和尺寸(父控件右上角作为坐标原点)<br>2.修改frame可以改变空间的位置和大小<br>3.调整控件的位置<br>4.修改控件的尺寸</p>
+<p>7.autoresizesSubviews,autoresizingMask<br>1. 默认为yes,表示当父视图尺寸改变的时候陪,子视图也随着改变<br>2. 默认为UIViewAutoresizingNone,不会自动伸缩。</p>
+<p>8.contentMode<br>设置内容模式.<br>1.UIViewContentModeScaleToFill 不按照原宽高比例（长和宽不等比例增长）以任意比例填充。这样视图不会有空白，且内容可以全部显示<br>2.UIViewContentModeAspectToFill 按照原长宽比例填充，不完全显示全部内容。这样内容可能溢出，但整个视图不会留有空白．<br>3.UIViewContentModeAspectToFit 按照原长宽比例（长和宽等比例增长），完全显示全部内容。这样容易照成左右或者上下留有空白。</p>
+<p>UIView常用到的添加子视图的方法:</p>
+<p>1. //加一个视图到一个视图里面<br>2. addSubview:<br>3. //将一个视图移到前面<br>4. bringSubviewToFront:<br>5. //将一个视图推送到背后<br>6. sendSubviewToBack:<br>7. //把视图移除<br>8. removeFromSuperview<br>9. //插入视图 并指定索引<br>10. insertSubview:atIndex:<br>11. //插入视图在某个视图之上<br>12. insertSubview:aboveSubview:<br>13. //插入视图在某个视图之下<br>14. insertSubview:belowSubview:<br>15. //交换两个位置索引的视图<br>exchangeSubviewAtIndex:withSubviewAtIndex:</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/e4-bd-bf-e7-94-a8hexocoding-e6-90-ad-e5-bb-ba-e4-b8-aa-e4-ba-ba-e5-8d-9a-e5-ae-a2/" rel="next" title="使用Hexo+Coding搭建个人博客">
+                <i class="fa fa-chevron-left"></i> 使用Hexo+Coding搭建个人博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/uisearchcontroller-e7-9a-84-e4-bd-bf-e7-94-a8/" rel="prev" title="UISearchController的使用">
+                UISearchController的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

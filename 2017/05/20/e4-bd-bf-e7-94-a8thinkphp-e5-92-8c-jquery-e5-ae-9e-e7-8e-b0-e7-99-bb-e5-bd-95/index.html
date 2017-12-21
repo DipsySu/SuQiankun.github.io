@@ -1,0 +1,800 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="夏天到了,乌鲁木齐的夏天似乎被拉长了;总让人觉得有大把时间可以挥霍,有大把时间可以做自己想做的事情,有大把时间可以学自己想学习的;  不过每个人每天都是只有24小时啊,哈哈哈,希望大家珍惜时间,早日完成一万小时法则;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用thinkphp 和 jquery 实现登录">
+<meta property="og:url" content="http://yoursite.com/2017/05/20/e4-bd-bf-e7-94-a8thinkphp-e5-92-8c-jquery-e5-ae-9e-e7-8e-b0-e7-99-bb-e5-bd-95/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="夏天到了,乌鲁木齐的夏天似乎被拉长了;总让人觉得有大把时间可以挥霍,有大把时间可以做自己想做的事情,有大把时间可以学自己想学习的;  不过每个人每天都是只有24小时啊,哈哈哈,希望大家珍惜时间,早日完成一万小时法则;">
+<meta property="og:updated_time" content="2017-06-20T08:52:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用thinkphp 和 jquery 实现登录">
+<meta name="twitter:description" content="夏天到了,乌鲁木齐的夏天似乎被拉长了;总让人觉得有大把时间可以挥霍,有大把时间可以做自己想做的事情,有大把时间可以学自己想学习的;  不过每个人每天都是只有24小时啊,哈哈哈,希望大家珍惜时间,早日完成一万小时法则;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/20/e4-bd-bf-e7-94-a8thinkphp-e5-92-8c-jquery-e5-ae-9e-e7-8e-b0-e7-99-bb-e5-bd-95/"/>
+
+
+
+
+
+  <title>使用thinkphp 和 jquery 实现登录 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/20/e4-bd-bf-e7-94-a8thinkphp-e5-92-8c-jquery-e5-ae-9e-e7-8e-b0-e7-99-bb-e5-bd-95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">使用thinkphp 和 jquery 实现登录</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T00:49:00+08:00">
+                2017-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>夏天到了,乌鲁木齐的夏天似乎被拉长了;总让人觉得有大把时间可以挥霍,有大把时间可以做自己想做的事情,有大把时间可以学自己想学习的;  不过每个人每天都是只有24小时啊,哈哈哈,希望大家珍惜时间,早日完成一万小时法则;</p>
+<a id="more"></a>
+<p>使用 form 提交表单,我想这个很简单,直接在 form 的的 action 中,设置提交的 URL,然后在 PHP 中进行判断就行了;</p>
+<p>如果使用 javascript 的话,我们需要去掉 form 的 action, 在登录按钮的 onclick 事件中执行事件;</p>
+<p>html 中代码如下:</p>
+<pre lang="”html”" line="”0″">
+&ltform class="am-form">&ltlabel for="username">用户名:&lt/label>
+&ltinput id="username" name="username" type="text" value="" />
+
+&ltlabel for="password">密码:&lt/label>
+&ltinput id="password" name="password" type="password" value="" />
+
+&ltlabel for="remember-me">
+&ltinput id="remember-me" type="checkbox" />
+记住密码
+&lt/label>
+&ltdiv class="am-cf">&ltbutton onclick="login.check()" class="am-btn am-btn-primary am-btn-sm am-fl" type="button">登录&lt/button>
+&ltinput class="am-btn am-btn-default am-btn-sm am-fr" name="" type="submit" value="忘记密码 ^_^? " />&lt/div>
+&lt/form>&nbsp;
+</pre>
+
+<p>效果如下:<br>`<br>    <form class="am-form"><br>            <label for="username">用户名:</label><br>            <input type="text" name="username" id="username" value=""></form></p>
+<pre><code>    &lt;label for=&quot;password&quot;&gt;密码:&lt;/label&gt;
+    &lt;input type=&quot;password&quot; name=&quot;password&quot; id=&quot;password&quot; value=&quot;&quot;&gt;
+
+    &lt;label for=&quot;remember-me&quot;&gt;
+        &lt;input id=&quot;remember-me&quot; type=&quot;checkbox&quot;&gt;
+        记住密码
+    &lt;/label&gt;
+
+    &lt;div class=&quot;am-cf&quot;&gt;
+        &lt;button  onclick=&quot;login.check()&quot; type=&quot;button&quot; class=&quot;am-btn am-btn-primary am-btn-sm am-fl&quot;&gt;登录&lt;/button&gt;
+        &lt;input type=&quot;submit&quot; name=&quot;&quot; value=&quot;忘记密码 ^_^? &quot; class=&quot;am-btn am-btn-default am-btn-sm am-fr&quot;&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre><p><code>当登录按钮被点击的时候,触发login 的 check 方法,在 js 中进行登录操作:</code><br>var login = {<br>    check:function(){<br>      var name = $(‘input[name=username]’).val();<br>      var psw = $(‘input[name=password]’).val();<br>        if(!name){<br>            showTip.error(‘用户名不能为空’);<br>            return false;<br>        }<br>        if(!psw){<br>            showTip.error(‘密码不能为空’);<br>            return false;<br>        }</p>
+<pre><code>    var url = 'loginIn';
+
+    var data = 'username='+name+'&amp;'+'password='+psw;
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function(json){
+            if (json.status == 200){
+                window.location.href = json.urlStr;
+            }else{
+                showTip.error(json.message);
+            }
+        },
+        dataType: 'JSON'
+    });
+
+}
+`</code></pre>
+
+<p>}<br></p>
+<p>在 php 的控制器中,写一个可以被外界访问的 public 的函数:</p>
+<pre lang="php">
+   public function loginIn()
+    {
+        $username = $_POST["username"];
+        $password= $_POST['password'];
+
+        if(!trim($username)){
+            return show(0,$username);
+        }
+        if(!trim($password)){
+            return show(0,'密码不能为空');
+        }
+        $Use = M('User');
+        $params['username']=$username;
+        $result = $Use->where($params)->select();
+
+        if($result[0]['username'] == $username){
+
+            if($result[0]['password'] == $password){
+                showURL(200,'登陆成功','loginAction');
+            }else{
+                show(0,'密码错误');
+                $this->display('login');
+            }
+
+        }else{
+
+            show(0,'账号错误');
+            $this->display('login');
+
+        }
+
+    }
+</pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/e4-bc-9e/" rel="next" title="伞">
+                <i class="fa fa-chevron-left"></i> 伞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/20/tp实现登录功能/" rel="prev" title="tp实现登录功能">
+                tp实现登录功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

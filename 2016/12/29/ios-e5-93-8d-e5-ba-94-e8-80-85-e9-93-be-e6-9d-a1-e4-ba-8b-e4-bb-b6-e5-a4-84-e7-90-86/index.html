@@ -1,0 +1,807 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在iOS开发中,会经常处理一些触摸事件.下面是一些触摸事件基本的处理流程; 用户在使用app的时候，会产生各样的事件。在iOS中的事件可以分为三种 触摸事件（Touch Event）加速计事件（Accelerometer Event）远程控制事件（Remote Control event）在iOS中，并不是所有的对象都能处理事件，直接或者间接继承UIResponder的对象(UIApplicati">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 响应者链条;事件处理">
+<meta property="og:url" content="http://yoursite.com/2016/12/29/ios-e5-93-8d-e5-ba-94-e8-80-85-e9-93-be-e6-9d-a1-e4-ba-8b-e4-bb-b6-e5-a4-84-e7-90-86/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="在iOS开发中,会经常处理一些触摸事件.下面是一些触摸事件基本的处理流程; 用户在使用app的时候，会产生各样的事件。在iOS中的事件可以分为三种 触摸事件（Touch Event）加速计事件（Accelerometer Event）远程控制事件（Remote Control event）在iOS中，并不是所有的对象都能处理事件，直接或者间接继承UIResponder的对象(UIApplicati">
+<meta property="og:image" content="http://suqiankun.coding.me/images/Responde/respo.png">
+<meta property="og:image" content="http://suqiankun.coding.me/images/Responde/2.png">
+<meta property="og:updated_time" content="2017-06-20T09:01:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 响应者链条;事件处理">
+<meta name="twitter:description" content="在iOS开发中,会经常处理一些触摸事件.下面是一些触摸事件基本的处理流程; 用户在使用app的时候，会产生各样的事件。在iOS中的事件可以分为三种 触摸事件（Touch Event）加速计事件（Accelerometer Event）远程控制事件（Remote Control event）在iOS中，并不是所有的对象都能处理事件，直接或者间接继承UIResponder的对象(UIApplicati">
+<meta name="twitter:image" content="http://suqiankun.coding.me/images/Responde/respo.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/29/ios-e5-93-8d-e5-ba-94-e8-80-85-e9-93-be-e6-9d-a1-e4-ba-8b-e4-bb-b6-e5-a4-84-e7-90-86/"/>
+
+
+
+
+
+  <title>iOS 响应者链条;事件处理 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/ios-e5-93-8d-e5-ba-94-e8-80-85-e9-93-be-e6-9d-a1-e4-ba-8b-e4-bb-b6-e5-a4-84-e7-90-86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS 响应者链条;事件处理</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T13:23:17+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS-开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在iOS开发中,会经常处理一些触摸事件.下面是一些触摸事件基本的处理流程;</p>
+<p>用户在使用app的时候，会产生各样的事件。在iOS中的事件可以分为三种</p>
+<p>触摸事件（Touch Event）<br>加速计事件（Accelerometer Event）<br>远程控制事件（Remote Control event）<br>在iOS中，并不是所有的对象都能处理事件，直接或者间接继承UIResponder的对象(UIApplication、 UIViewController、UIWindow和所有继承自UIView的UIKit类）才能对事件进行响应，我们称呼这些为“响应者对象”；</p>
+<a id="more"></a>
+<p>在UIRecponder中提供了下面的代码来处理事件：</p>
+<p><figure class="highlight plain"></figure></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td class="gutter"></td></p>
+<p><div class="line">1</div></p>
+<p><div class="line">2</div></p>
+<p><div class="line">3</div></p>
+<p><div class="line">4</div></p>
+<p><div class="line">5</div></p>
+<p><div class="line">6</div></p>
+<p><div class="line">7</div></p>
+<p><div class="line">8</div></p>
+<p><div class="line">9</div></p>
+<p><div class="line">10</div></p>
+<p><div class="line">11</div></p>
+<p><div class="line">12</div></p>
+<p><div class="line">13</div></p>
+<p><div class="line">14</div></p>
+<p><div class="line">15</div></p>
+<p><div class="line">16</div></p>
+<p><td class="code"></td></p>
+<p><div class="line"></div></p>
+<p><div class="line">//触摸事件</div></p>
+<p><div class="line">- (void)touchesBegan:(NSSet <em>)touches withEvent:(UIEvent </em>)event;</div></p>
+<p><div class="line">- (void)touchesMoved:(NSSet <em>)touches withEvent:(UIEvent </em>)event;</div></p>
+<p><div class="line">- (void)touchesEnded:(NSSet <em>)touches withEvent:(UIEvent </em>)event;</div></p>
+<p><div class="line">- (void)touchesCancelled:(NSSet <em>)touches withEvent:(UIEvent </em>)event;</div></p>
+<p><div class="line">//加速计事件</div></p>
+<p><div class="line">- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event;</div></p>
+<p><div class="line">- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event;</div></p>
+<p><div class="line">- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event;</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">[/c]</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">11//远程控制事件</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">[c]- (void)remoteControlReceivedWithEvent:(UIEvent *)event;</div><br><br><br><br>那我们就可以用触摸事件处理的过程来说一下响应者链条和响应者对象，在刚才我们说了能对事件进行响应的叫做响应者对象，响应者对象能够响应、处理事件。而响应者链条是由多个响应者对象构成的一个具有层级关系的东西。</p>
+<p>比如下图：</p>
+<p><a href="http://suqiankun.coding.me/images/Responde/respo.png" target="_blank" rel="external"><img src="http://suqiankun.coding.me/images/Responde/respo.png" alt=""></a></p>
+<p>上图中的view，controller，window，application都是响应者对象，按照箭头的走向不难看出响应者链条的关系：</p>
+<p>响应者链条是由响应者对象组成（view，controller，window，application。。。）<br>一个响应者的下一个响应者是他的父控件，或者是他所在的控制器 响应者链条可以让多个响应者同时响应一个触摸事件；<br><a href="http://suqiankun.coding.me/images/Responde/2.png" target="_blank" rel="external"><img src="http://suqiankun.coding.me/images/Responde/2.png" alt=""></a></p>
+<p>我在颜色View.m的文件中写了</p>
+<p><figure class="highlight plain"></figure></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td class="gutter"></td></p>
+<p><div class="line">1</div></p>
+<p><div class="line">2</div></p>
+<p><div class="line">3</div></p>
+<p><div class="line">4</div></p>
+<p><div class="line">5</div></p>
+<p><td class="code"></td></p>
+<p><div class="line">- (void)touchesBegan:(NSSet <em>)touches withEvent:(UIEvent </em>)event</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">NSLog(@&amp;quot;颜色View被摸了&amp;quot; );</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">}</div><br><br><br><br>的代码，当一个view被点击，它是响应者链的开端。整个响应者链和事件分发的使命都是找出第一响应者。这个第一响应者是最适合做出响应事件的对象，整个响应过程是这样子的：</p>
+<p>UIAppliction –&gt; UIWiondw –&gt;递归找到最适合处理事件的控件–&gt;控件调用touches方法–&gt;判断是否实现touches方法–&gt;没有实现默认会将事件传递给上一个响应者–&gt;找到上一个响应者</p>
+<p>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图</p>
+<p>在视图层次结构的最顶级视图，如果也不能处理收到的事件或消息，则其将事件或消息传递给window对象进行处理</p>
+<p>如果window对象也不处理，则其将事件或消息传递给UIApplication对象</p>
+<p>如果UIApplication也不能处理该事件或消息，则将其丢弃</p>
+<p>当我在greenViewa.m中touchesBegan的方法中添加代码</p>
+<p><code>［super touchesBegan:touches withEvent:event］;</code></p>
+<p>在图片中可以看出greenView是Yellow的子视图，也就是说greenview的下一个响应者时yellow,而greenview.m中调用了super，那么就是说yellow也可以响应touchesBegan的方法，</p>
+<p>这样的话运行结果就是：</p>
+<p><figure class="highlight plain"></figure></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td class="gutter"></td></p>
+<p><div class="line">1</div></p>
+<p><div class="line">2</div></p>
+<p><div class="line">3</div></p>
+<p><div class="line">4</div></p>
+<p><td class="code"></td></p>
+<p><div class="line"></div></p>
+<p><div class="line">2015-11-07 00:35:01.748 ResponderChain[4984:95390] yellowView被摸了</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">2015-11-07 00:35:01.748 ResponderChain[4984:95390] greenView被摸了[/c]</div><br><br><br><br>这样就实现了多个响应者对象响应一个事件。我们可以用这个作出有意思的东西。</p>
+<p>参考文献：</p>
+<p><a href="https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/event_delivery_responder_chain/event_delivery_responder_chain.html#//apple_ref/doc/uid/TP40009541-CH4-SW1" target="_blank" rel="external">https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/event_delivery_responder_chain/event_delivery_responder_chain.html#//apple_ref/doc/uid/TP40009541-CH4-SW1</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/e8-87-aa-e7-94-b1/" rel="next" title="自由">
+                <i class="fa fa-chevron-left"></i> 自由
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/e5-96-9c-e6-82-a6/" rel="prev" title="喜悦">
+                喜悦 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,779 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="数组是 PHP 语言中最重要的数据类型之一,在 PHP 中的应用非常广泛; php 是一门弱数据类型的语言,所以 php 中的数组变量可以存储任意类型,任意个数的变量,并且可以实现其他强数据类型类型中堆、栈、队列的功能； 功能异常强大，个人觉得 php 的比其他的高级语言的数组稍微那么好用那么一丢丢；">
+<meta name="keywords" content="php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php 数组">
+<meta property="og:url" content="http://yoursite.com/2016/12/29/php-e6-95-b0-e7-bb-84/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="数组是 PHP 语言中最重要的数据类型之一,在 PHP 中的应用非常广泛; php 是一门弱数据类型的语言,所以 php 中的数组变量可以存储任意类型,任意个数的变量,并且可以实现其他强数据类型类型中堆、栈、队列的功能； 功能异常强大，个人觉得 php 的比其他的高级语言的数组稍微那么好用那么一丢丢；">
+<meta property="og:updated_time" content="2017-06-20T09:01:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="php 数组">
+<meta name="twitter:description" content="数组是 PHP 语言中最重要的数据类型之一,在 PHP 中的应用非常广泛; php 是一门弱数据类型的语言,所以 php 中的数组变量可以存储任意类型,任意个数的变量,并且可以实现其他强数据类型类型中堆、栈、队列的功能； 功能异常强大，个人觉得 php 的比其他的高级语言的数组稍微那么好用那么一丢丢；">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/29/php-e6-95-b0-e7-bb-84/"/>
+
+
+
+
+
+  <title>php 数组 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/php-e6-95-b0-e7-bb-84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">php 数组</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T07:50:59+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/南腔北调/" itemprop="url" rel="index">
+                    <span itemprop="name">南腔北调</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数组是 PHP 语言中最重要的数据类型之一,在 PHP 中的应用非常广泛;</p>
+<p>php 是一门弱数据类型的语言,所以 php 中的数组变量可以存储任意类型,任意个数的变量,并且可以实现其他强数据类型类型中堆、栈、队列的功能；</p>
+<p>功能异常强大，个人觉得 php 的比其他的高级语言的数组稍微那么好用那么一丢丢；</p>
+<a id="more"></a>
+<h3 id="1-定义一个-php数组"><a href="#1-定义一个-php数组" class="headerlink" title="1.定义一个 php数组"></a>1.定义一个 php数组</h3><ul>
+<li><p>直接为数组元素赋值既可以声明数组</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div><br><div class="line">7</div><br><div class="line">8</div></td><br><td class="code"><br><div class="line">eg: $数组变量名[下标] = 变量值; 下标可以为字符串&amp;整数;</div><br><div class="line">$testArray[“姓名”] = “小小苏”;</div><br><div class="line">$testArray[“age”] = “23”;</div><br><div class="line">echo $testArray[“姓名”];</div><br><div class="line">echo $testArray[“age”];</div><br><div class="line"></div><br><div class="line">$testArray[3] = “23”;</div><br><div class="line">echo $testArray[“3”];</div></td><br></tr><br></tbody><br></table><br></figure>
+</li>
+<li><p>使用 <code>array()</code> 函数声明函数</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div></td><br><td class="code"><br><div class="line">eg: $数组变量名 = array(key =&gt; value,……,key =&gt; value);</div><br><div class="line"></div><br><div class="line">$aboutMe = array(“ID” =&gt; 0991,”姓名” =&gt; “小小苏” , “公司” =&gt; “度妈算什么” , “地址” =&gt; “乌鲁木齐” );</div><br><div class="line"></div><br><div class="line">echo $aboutMe[“ID”] .”&lt;br/&gt;”</div><br><div class="line">echo $aboutMe[“地址”] .”&lt;br/&gt;”</div></td><br></tr><br></tbody><br></table><br></figure>
+</li>
+<li><p>多维数组的声明</p>
+<p>php 语言中多维数组的明明与其他语言类似,将一个一维数组放到另外一个数组中,那么这个数组就是一个二维数组</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div></td><br><td class="code"><br><div class="line">$aboutUs = array(</div><br><div class="line">“第1元素:” =&gt; array(“ID” =&gt; “0991”,”姓名” =&gt; “小小苏” , “公司” =&gt; “度妈算什么” , “地址” =&gt; “乌鲁木齐” ),</div><br><div class="line">“第2元素:” =&gt; array(“ID” =&gt; “0991”,”姓名” =&gt; “小六” , “公司” =&gt; “度妈算什么” , “地址” =&gt; “乌鲁木齐” ),</div><br><div class="line">“第3元素:” =&gt; array(“ID” =&gt; “0991”,”姓名” =&gt; “小五” , “公司” =&gt; “度妈算什么” , “地址” =&gt; “乌鲁木齐” )</div><br><div class="line">);</div><br><div class="line">echo $aboutUs[“第1元素:”][“姓名”];</div></td><br></tr><br></tbody><br></table><br></figure>
+
+</li>
+</ul>
+<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3><p>我们同样可以使用 for 循环对数组进行遍历</p>
+<ul>
+<li><p>for 循环遍历数组</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div></td><br><td class="code"><br><div class="line">$foods = array(“酸奶”,”牛奶”,”鸡腿”,”鸭腿”,”牛排”);</div><br><div class="line"></div><br><div class="line">for ($i=0; $i &lt; count($foods) ; $i++) {</div><br><div class="line">echo “今中午咱们吃”.$foods[$i].”、&lt;br/&gt;”;</div><br><div class="line">}</div></td><br></tr><br></tbody><br></table><br></figure>
+</li>
+<li><p>foreach 遍历数组</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div></td><br><td class="code"><br><div class="line">$contact = array(“ID” =&gt; 1,”姓名” =&gt; “小苏” , “公司” =&gt; “度妈算什么” , “地址” =&gt; “乌鲁木齐” );</div><br><div class="line"></div><br><div class="line">// 使用 foreach 遍历数组</div><br><div class="line">foreach ($contact as $key =&gt; $value) {</div><br><div class="line">echo “$key == $value &lt;/br&gt;”;</div><br><div class="line">}</div></td><br></tr><br></tbody><br></table><br></figure>
+</li>
+<li><p>使用 while + list+ each 遍历数组</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div><br><div class="line">7</div><br><div class="line">8</div><br><div class="line">9</div><br><div class="line">10</div><br><div class="line">11</div><br><div class="line">12</div><br><div class="line">13</div><br><div class="line">14</div><br><div class="line">15</div><br><div class="line">16</div></td><br><td class="code"><br><div class="line"></div><br><div class="line">//使用 while + list+ each 遍历数组 效果等同 foreach</div><br><div class="line"></div><br><div class="line">each() 函数需要传入一个数组参数,返回传入数组元素当前的键值对,并且向后移动数组指针</div><br><div class="line"></div><br><div class="line">list() 函数同构赋值运算符 “=” 将数组中的每个元素的值对应的赋值给 list() 函数中的每个参数</div><br><div class="line"></div><br><div class="line">eg: list($name,$age,$address,$phoneNumber) = array(“小小酥”,”23”,”乌鲁木齐”,”155<em>**</em>1276”);</div><br><div class="line"></div><br><div class="line">echo “&lt;dl&gt; while + list+ each 遍历数组”;</div><br><div class="line"></div><br><div class="line">while ( list($key, $value) = each($contact)) {</div><br><div class="line">echo “&lt;dd&gt; $key : $value &lt;/dd&gt;”;</div><br><div class="line">}</div><br><div class="line"></div><br><div class="line">echo “&lt;/dl&gt;”;</div></td><br></tr><br></tbody><br></table><br></figure>
+
+</li>
+</ul>
+<h3 id="使用数组指针介绍"><a href="#使用数组指针介绍" class="headerlink" title="使用数组指针介绍"></a>使用数组指针介绍</h3><p>数组指针是数组内部的组织机制,指向数组的某个元素;默认指向数组的第一个元素,通过移动或者改变数组指针的位置,可以访问数组中的任意元素;</p>
+<ul>
+<li>current() —&gt; 获取数组当前位置元素内容资料;</li>
+<li>key() —&gt; 获取数组当前指针所指向资料的索引值;</li>
+<li>next() —&gt; 将当前数组指针向后移动一位;</li>
+<li>prev() —&gt; 讲数组指针的为指倒回一位;</li>
+<li>end() —-&gt; 将数组指针指向最后一个元素</li>
+<li>reset() —–&gt; 将数组指针无条件的移动到第一个索引位置;<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div><br><div class="line">7</div><br><div class="line">8</div><br><div class="line">9</div><br><div class="line">10</div><br><div class="line">11</div><br><div class="line">12</div><br><div class="line">13</div><br><div class="line">14</div><br><div class="line">15</div><br><div class="line">16</div><br><div class="line">17</div><br><div class="line">18</div><br><div class="line">19</div><br><div class="line">20</div><br><div class="line">21</div><br><div class="line">22</div><br><div class="line">23</div><br><div class="line">24</div><br><div class="line">25</div><br><div class="line">26</div></td><br><td class="code"><br><div class="line">eg:</div><br><div class="line"></div><br><div class="line"></div><br><div class="line">$contact = array(“ID” =&gt; 1,”姓名” =&gt; “小苏” , “公司” =&gt; “度妈算什么” , “地址” =&gt; “乌鲁木齐” );</div><br><div class="line"></div><br><div class="line"></div><br><div class="line">//数组的指针操作;</div><br><div class="line">echo “ 第一个元素 “ .key($contact).”=&gt;”.current($contact).”&lt;br/&gt;”;</div><br><div class="line">//数组指针未移动</div><br><div class="line">echo “ 第一个元素 “ .key($contact).”=&gt;”.current($contact).”&lt;br/&gt;”;</div><br><div class="line"></div><br><div class="line">//next() 将数组指针向后移动一位</div><br><div class="line">next($contact);</div><br><div class="line">echo “ 第2个元素 “ .key($contact).”=&gt;”.current($contact).”&lt;br/&gt;”;</div><br><div class="line">echo “ 第2个元素 “ .key($contact).”=&gt;”.current($contact).”&lt;br/&gt;”;</div><br><div class="line"></div><br><div class="line">// prev() ====&gt; 讲述数组指针向前移动一位</div><br><div class="line">prev($contact);</div><br><div class="line">echo “ 第一个元素 “ .key($contact).”=&gt;”.current($contact).”&lt;br/&gt;”;</div><br><div class="line">//output:第一个元素 ID=&gt;1</div><br><div class="line"></div><br><div class="line"></div><br><div class="line">// end(array) ===&gt; 数组指针移动到最后一位</div><br><div class="line">end($contact);</div><br><div class="line">echo “最后一个元素 “ .key($contact).”=&gt;”.current($contact).”&lt;br/&gt;”;</div><br><div class="line">//output: 最后一个元素 地址=&gt;乌鲁木齐</div></td><br></tr><br></tbody><br></table><br></figure></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/28/e5-90-ac-e9-9b-a8/" rel="next" title="听雨">
+                <i class="fa fa-chevron-left"></i> 听雨
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/e5-a4-a9-e6-89-8d-e4-b8-8e-e8-8b-b1-e9-9b-84/" rel="prev" title="天才与英雄">
+                天才与英雄 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-定义一个-php数组"><span class="nav-number">1.</span> <span class="nav-text">1.定义一个 php数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历数组"><span class="nav-number">2.</span> <span class="nav-text">遍历数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用数组指针介绍"><span class="nav-number">3.</span> <span class="nav-text">使用数组指针介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

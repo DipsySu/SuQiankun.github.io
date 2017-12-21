@@ -1,0 +1,759 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言之前博客挂在 github pages 上,回到新疆之后发现访问不了了.一琢磨就买个个主机使用 wordpress搭建了个个人博客,当使用 wordpress 实在是不能提起我的写作欲望,又麻溜的切换到了 hexo.在网上看到了coding 也提供了类似 github pages 的服务 coding-pages,瞬间觉得太好了.于是我又开始了 hexo 之旅;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hexo+Coding搭建个人博客">
+<meta property="og:url" content="http://yoursite.com/2016/12/29/e4-bd-bf-e7-94-a8hexocoding-e6-90-ad-e5-bb-ba-e4-b8-aa-e4-ba-ba-e5-8d-9a-e5-ae-a2/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="前言之前博客挂在 github pages 上,回到新疆之后发现访问不了了.一琢磨就买个个主机使用 wordpress搭建了个个人博客,当使用 wordpress 实在是不能提起我的写作欲望,又麻溜的切换到了 hexo.在网上看到了coding 也提供了类似 github pages 的服务 coding-pages,瞬间觉得太好了.于是我又开始了 hexo 之旅;">
+<meta property="og:updated_time" content="2017-06-20T09:02:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Hexo+Coding搭建个人博客">
+<meta name="twitter:description" content="前言之前博客挂在 github pages 上,回到新疆之后发现访问不了了.一琢磨就买个个主机使用 wordpress搭建了个个人博客,当使用 wordpress 实在是不能提起我的写作欲望,又麻溜的切换到了 hexo.在网上看到了coding 也提供了类似 github pages 的服务 coding-pages,瞬间觉得太好了.于是我又开始了 hexo 之旅;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/29/e4-bd-bf-e7-94-a8hexocoding-e6-90-ad-e5-bb-ba-e4-b8-aa-e4-ba-ba-e5-8d-9a-e5-ae-a2/"/>
+
+
+
+
+
+  <title>使用Hexo+Coding搭建个人博客 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/e4-bd-bf-e7-94-a8hexocoding-e6-90-ad-e5-bb-ba-e4-b8-aa-e4-ba-ba-e5-8d-9a-e5-ae-a2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">使用Hexo+Coding搭建个人博客</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T10:59:16+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实用技术/" itemprop="url" rel="index">
+                    <span itemprop="name">实用技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前博客挂在 github pages 上,回到新疆之后发现访问不了了.一琢磨就买个个主机使用 wordpress搭建了个个人博客,当使用 wordpress 实在是不能提起我的写作欲望,又麻溜的切换到了 hexo.在网上看到了coding 也提供了类似 github pages 的服务 coding-pages,瞬间觉得太好了.于是我又开始了 hexo 之旅;</p>
+<a id="more"></a>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li>环境：　mac　os ＋　hexo3.0　＋ iTerm　＋ Mou　＋ next + homebrew<br>１．　安装非常简单，只需要几分钟即可搞定；</li>
+</ul>
+<p>２．　查看你的电脑中有没有安装</p>
+<ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a></li>
+<li><a href="http://git-scm.com/" target="_blank" rel="external">Git</a>.</li>
+<li>如果您的电脑没有安装上诉的程序,可以点击访问安装;<br>*<!--more-->
+</li>
+</ul>
+<p>好了,如果这些步骤都完成,您就可以安装 hexo 了;</p>
+<p><code>npm install -g hexo-cli</code></p>
+<h3 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h3><p>执行下面的命令,Hexo 会在文件夹中新建需要的文件</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div></td><br><td class="code"><br><div class="line">hexo init &lt;folder&gt;</div><br><div class="line">hexo init ~Document/Hexo e.g.</div><br><div class="line">cd &lt;folder&gt;</div><br><div class="line">npm install</div></td><br></tr><br></tbody><br></table><br></figure>完成这一步之后,您就可以在您的 hexo 文件夹下执行 <code>hexo g</code> &amp; <code>hexo s</code><br>在浏览器中访问 <code>http://localhost:4000</code>,这是您就能看到 Hexo 的页面了,是不是很帅!轻轻松松就看到了效果,有没有觉得很有成就感;<br>当然这个博客是存在于您的本地;先别着急,咱们看一下本地怎么配置,怎么配置主题;<br><br>在 Hexo 文件夹下有一个<code>_config.yml</code>,就叫他 <code>站点配置文件</code>吧;文件不大,加上注释空行也就八十多行;<br><br><figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div><br><div class="line">7</div><br><div class="line">8</div><br><div class="line">9</div><br><div class="line">10</div><br><div class="line">11</div><br><div class="line">12</div><br><div class="line">13</div><br><div class="line">14</div><br><div class="line">15</div><br><div class="line">16</div><br><div class="line">17</div><br><div class="line">18</div><br><div class="line">19</div><br><div class="line">20</div><br><div class="line">21</div><br><div class="line">22</div><br><div class="line">23</div><br><div class="line">24</div><br><div class="line">25</div><br><div class="line">26</div><br><div class="line">27</div><br><div class="line">28</div><br><div class="line">29</div><br><div class="line">30</div><br><div class="line">31</div><br><div class="line">32</div><br><div class="line">33</div><br><div class="line">34</div><br><div class="line">35</div><br><div class="line">36</div><br><div class="line">37</div><br><div class="line">38</div><br><div class="line">39</div><br><div class="line">40</div><br><div class="line">41</div><br><div class="line">42</div><br><div class="line">43</div><br><div class="line">44</div><br><div class="line">45</div><br><div class="line">46</div><br><div class="line">47</div><br><div class="line">48</div><br><div class="line">49</div><br><div class="line">50</div><br><div class="line">51</div><br><div class="line">52</div><br><div class="line">53</div><br><div class="line">54</div><br><div class="line">55</div><br><div class="line">56</div><br><div class="line">57</div><br><div class="line">58</div><br><div class="line">59</div><br><div class="line">60</div><br><div class="line">61</div><br><div class="line">62</div><br><div class="line">63</div><br><div class="line">64</div><br><div class="line">65</div><br><div class="line">66</div><br><div class="line">67</div><br><div class="line">68</div><br><div class="line">69</div><br><div class="line">70</div><br><div class="line">71</div><br><div class="line">72</div><br><div class="line">73</div><br><div class="line">74</div><br><div class="line">75</div><br><div class="line">76</div><br><div class="line">77</div><br><div class="line">78</div><br><div class="line">79</div><br><div class="line">80</div></td><br><td class="code"><br><div class="line"></div><br><div class="line"># Hexo Configuration</div><br><div class="line">## Docs: <a href="http://hexo.io/docs/configuration.html" target="_blank" rel="external">http://hexo.io/docs/configuration.html</a></div><br><div class="line">## Source: <a href="https://github.com/hexojs/hexo/" target="_blank" rel="external">https://github.com/hexojs/hexo/</a></div><br><div class="line"></div><br><div class="line"># Site 这下面的几项配置都很简单，你看我的博客就知道分别是什么意思</div><br><div class="line">title: 两好三坏 #博客名</div><br><div class="line">subtitle: 爱情,两好三坏 #副标题</div><br><div class="line">description: 长恨人心不如水,等闲平地起波澜 #用于搜索，没有直观表现</div><br><div class="line">author: 两好三坏 #作者</div><br><div class="line">language: zh-CN #语言</div><br><div class="line">timezone: #时区，此处不填写，hexo会以你目前电脑的时区为默认值</div><br><div class="line"></div><br><div class="line"># URL 暂不配置，使用默认值</div><br><div class="line">## If your site is put in a subdirectory, set url as ‘<a href="http://yoursite.com/child">http://yoursite.com/child</a>‘ and root as ‘/child/‘</div><br><div class="line">url: <a href="http://opiece.me" target="_blank" rel="external">http://opiece.me</a> #域名</div><br><div class="line">root: /</div><br><div class="line">permalink: :year/:month/:day/:title/</div><br><div class="line">permalink_defaults:</div><br><div class="line"></div><br><div class="line"># Directory 暂不配置，使用默认值</div><br><div class="line">source_dir: source</div><br><div class="line">public_dir: public</div><br><div class="line">tag_dir: tags</div><br><div class="line">archive_dir: archives</div><br><div class="line">category_dir: categories</div><br><div class="line">code_dir: downloads/code</div><br><div class="line">i18n_dir: :lang</div><br><div class="line">skip_render:</div><br><div class="line"></div><br><div class="line"># Writing 文章布局等，使用默认值</div><br><div class="line">new_post_name: :title.md # File name of new posts</div><br><div class="line">default_layout: post</div><br><div class="line">titlecase: false # Transform title into titlecase</div><br><div class="line">external_link: true # Open external links in new tab</div><br><div class="line">filename_case: 0</div><br><div class="line">render_drafts: false</div><br><div class="line">post_asset_folder: false</div><br><div class="line">relative_link: false</div><br><div class="line">future: true</div><br><div class="line">highlight:</div><br><div class="line">enable: true</div><br><div class="line">line_number: true</div><br><div class="line">tab_replace:</div><br><div class="line"></div><br><div class="line"># Category &amp; Tag 暂不配置，使用默认值</div><br><div class="line">default_category: uncategorized</div><br><div class="line">category_map:</div><br><div class="line">tag_map:</div><br><div class="line"></div><br><div class="line"># Date / Time format 时间格式，使用默认值</div><br><div class="line">## Hexo uses Moment.js to parse and display date</div><br><div class="line">## You can customize the date format as defined in</div><br><div class="line">## <a href="http://momentjs.com/docs/#/displaying/format/" target="_blank" rel="external">http://momentjs.com/docs/#/displaying/format/</a></div><br><div class="line">date_format: YYYY-MM-DD</div><br><div class="line">time_format: HH:mm:ss</div><br><div class="line"></div><br><div class="line"># Pagination</div><br><div class="line">## Set per_page to 0 to disable pagination</div><br><div class="line">per_page: 10 #每页显示的文章数，0表示不分页</div><br><div class="line">pagination_dir: page</div><br><div class="line"></div><br><div class="line"># Extensions 插件配置，暂时不配置</div><br><div class="line">## Plugins: <a href="http://hexo.io/plugins/" target="_blank" rel="external">http://hexo.io/plugins/</a></div><br><div class="line">## Themes: <a href="http://hexo.io/themes/" target="_blank" rel="external">http://hexo.io/themes/</a></div><br><div class="line">theme: hexo-theme-next</div><br><div class="line">#使用的主题，即：themes文件夹下的主题文件夹名</div><br><div class="line"></div><br><div class="line">feed: #之后配置rss会用，使用如下配置即可</div><br><div class="line">type:</div><br><div class="line">path:</div><br><div class="line">limit:</div><br><div class="line"></div><br><div class="line"># Deployment 用于部署到github，之前已经配置过</div><br><div class="line">## Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></div><br><div class="line"></div><br><div class="line">deploy:</div><br><div class="line">type: git</div><br><div class="line">repo: <a href="https://git.coding.net/usename/usename.git" target="_blank" rel="external">https://git.coding.net/usename/usename.git</a> #coding仓库地址</div><br><div class="line">branch: coding-pages</div></td><br></tr><br></tbody><br></table><br></figure>再次运行 <code>hexo</code>,看看 hexo 比第一次打开之后顺眼多了,至少变成汉字了吧~哈哈哈哈哈哈<br><br>###切换主题,主题配置文件<br>在iTerm进入到 Hexo 目录下,然后执行 git 下载 next 主题<br><br><code>git clone https://github.com/iissnan/hexo-theme-next.git</code><br><br>下载完成后会在 hexo 下的 theme 文件下,文件名夹名为 <code>hexo-theme-next</code>,在<code>站点配置文件</code>中将主题设置为 <code>hexo-theme-next</code>;再次运行 <code>hexo s</code> 查看效果,是不是跟开心啦~~~<br><br>在<code>hexo-theme-next</code>中有<code>_config.yml</code>,这是是<code>主题的配置文件</code><br>你可以在<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">Next 帮助文档</a>查看如何个性化定制;<br><br>### 写作<br><br><em>   你可以使用下列命令创建一个新的文章:
+</em>   <code>hexo new [layout] &amp;lt;title&amp;gt;</code> ,layout 是布局,title 是文章标题;<br>写作是使用 markdown语法,你可以在<a href="http://wowubuntu.com/markdown/#list" target="_blank" rel="external">MarkDown 语法入门</a>查看;<br>如果你需要标签功能和分类功能,在终端进入到您的hexo文件夹下 执行:<br><br><em>   <code>hexo new page &quot;tags&quot;</code> 创建标签页面,在hexo 文件夹下的 <code>\source\tags\index.md</code> 中添加一个 type: “tags”
+</em>   <code>hexo new page categories</code> 创建分类页面,在hexo 文件夹下的 <code>\source\categories\index.md</code> 中添加一个 type: “categories”<br>然后你也可以在hexo 文件夹下的 <code>\scaffolds\post.md</code> 中添加一个上 <code>tags:</code> <code>categories:</code> ,这个 post 是你每次书写的时候的一个模板;添加后每次创建行的文章就不用去在添加 tags 和 categories 了;<br><br>### 部署<br><br>写作完成之后可以使用命令 <code>hexo g</code>生成静态页面.在后运行 <code>hexo s</code>查看效果;<br><code>hexo d</code>是部署到 coding 或者 github 上面,在<code>站点配置文件中</code><br><br><figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div></td><br><td class="code"><br><div class="line">deploy:</div><br><div class="line">type: git</div><br><div class="line">repo: <a href="https://git.coding.net/usename/usename.git" target="_blank" rel="external">https://git.coding.net/usename/usename.git</a> #coding仓库地址</div><br><div class="line">branch: coding-pages</div></td><br></tr><br></tbody><br></table><br></figure>
+
+<ul>
+<li>你可以先到 coding 上面去申请一个帐号,然后行创建一个与你 coding 用户名相同的项目;</li>
+<li>打开你刚才创建的项目,有一栏叫做 <code>Page 服务</code>,打开,然后选择部署;</li>
+<li><code>hexo d</code>是提交到你这个 <code>repo</code>的仓库,如果你没有配置 ssh,那么可能就提示您输入您的从coding 上的用户名和密码来验证;</li>
+<li>如果宁蒗的输入,可以配置 ssh 公钥来进行配置<a href="https://coding.net/help/doc/git/ssh-key.html" target="_blank" rel="external">点击查看配置 ssh</a><br>当您完成写作之后执行 <code>hexo g &amp;amp; hexo s</code>,过上一会就可以访问您的文章了;</li>
+</ul>
+<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p>如果您有自己的域名,你可以在在 dns 解析添加解析到 pages.coding.me;这样别人就可以通过域名访问您的博客了;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/e5-8a-a8-e6-80-81-e4-bf-ae-e6-94-b9app-e7-9a-84-e7-9a-84-e6-9c-8d-e5-8a-a1-e5-99-a8-e5-9c-b0-e5-9d-80/" rel="next" title="动态修改App的的服务器地址">
+                <i class="fa fa-chevron-left"></i> 动态修改App的的服务器地址
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/uiview-e6-96-b9-e6-b3-95-e5-92-8c-e5-b1-9e-e6-80-a7/" rel="prev" title="UIView方法和属性">
+                UIView方法和属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">1.1.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建站"><span class="nav-number">1.1.1.</span> <span class="nav-text">建站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定域名"><span class="nav-number">1.1.2.</span> <span class="nav-text">绑定域名</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,842 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="闭包是功能性自包含的模块;在代码传递和使用.用法类似 OC 中的 block;定义一个闭包：">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift中闭包的使用">
+<meta property="og:url" content="http://yoursite.com/2016/12/29/swift-e4-b8-ad-e9-97-ad-e5-8c-85-e7-9a-84-e4-bd-bf-e7-94-a8/index.html">
+<meta property="og:site_name" content="两好三坏">
+<meta property="og:description" content="闭包是功能性自包含的模块;在代码传递和使用.用法类似 OC 中的 block;定义一个闭包：">
+<meta property="og:updated_time" content="2017-06-20T09:01:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift中闭包的使用">
+<meta name="twitter:description" content="闭包是功能性自包含的模块;在代码传递和使用.用法类似 OC 中的 block;定义一个闭包：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/29/swift-e4-b8-ad-e9-97-ad-e5-8c-85-e7-9a-84-e4-bd-bf-e7-94-a8/"/>
+
+
+
+
+
+  <title>swift中闭包的使用 | 两好三坏</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">两好三坏</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/swift-e4-b8-ad-e9-97-ad-e5-8c-85-e7-9a-84-e4-bd-bf-e7-94-a8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">swift中闭包的使用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T11:08:14+08:00">
+                2016-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS-开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>闭包是功能性自包含的模块;在代码传递和使用.用法类似 OC 中的 <code>block</code>;<br>定义一个闭包：</p>
+<a id="more"></a>
+<p><code>var block = ()-&amp;gt;()</code><br>第一个括号里面是闭包的参数,第二个括号是返回值.定义类似函数;</p>
+<figure class="highlight plain"><br><table><br><tbody><br><tr><br><td class="gutter"><br><div class="line">1</div><br><div class="line">2</div><br><div class="line">3</div><br><div class="line">4</div><br><div class="line">5</div><br><div class="line">6</div><br><div class="line">7</div></td><br><td class="code"><br><div class="line">{</div><br><div class="line">(参数:类型) -&gt;返回类型 in</div><br><div class="line"></div><br><div class="line">执行方法</div><br><div class="line">I</div><br><div class="line">return 返回类型</div><br><div class="line">}</div></td><br></tr><br></tbody><br></table><br></figure>
+
+<p>## </p>
+<!--more-->
+<h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><p>１．一个闭包求和：</p>
+<p><figure class="highlight plain"></figure></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td class="gutter"></td></p>
+<p><div class="line">1</div></p>
+<p><div class="line">2</div></p>
+<p><div class="line">3</div></p>
+<p><div class="line">4</div></p>
+<p><div class="line">5</div></p>
+<p><div class="line">6</div></p>
+<p><div class="line">7</div></p>
+<p><div class="line">8</div></p>
+<p><td class="code"></td></p>
+<p><div class="line"></div></p>
+<p><div class="line">typealias myBlock = (Int,Int) -&gt; Int</div></p>
+<p><div class="line">var blockSum: myBlock</div></p>
+<p><div class="line">blockSum = { (num1:Int,num2:Int) -&gt;Int in</div></p>
+<p><div class="line">return num1+num2</div></p>
+<p><div class="line">}</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">blockSum(10,29) //—-&gt;result = 39</div><br><br><br><br>2．闭包回调<br>多使用在控制器之间传值</p>
+<p><figure class="highlight plain"></figure></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td class="gutter"></td></p>
+<p><div class="line">1</div></p>
+<p><div class="line">2</div></p>
+<p><div class="line">3</div></p>
+<p><div class="line">4</div></p>
+<p><div class="line">5</div></p>
+<p><div class="line">6</div></p>
+<p><div class="line">7</div></p>
+<p><div class="line">8</div></p>
+<p><div class="line">9</div></p>
+<p><div class="line">10</div></p>
+<p><div class="line">11</div></p>
+<p><div class="line">12</div></p>
+<p><div class="line">13</div></p>
+<p><div class="line">14</div></p>
+<p><div class="line">15</div></p>
+<p><div class="line">16</div></p>
+<p><div class="line">17</div></p>
+<p><div class="line">18</div></p>
+<p><div class="line">19</div></p>
+<p><div class="line">20</div></p>
+<p><div class="line">21</div></p>
+<p><td class="code"></td></p>
+<p><div class="line">/**</div></p>
+<p><div class="line">FristCtrl跳转到 SecondCtrl,将 SecondCtrl的数据传递给FristCtrl</div></p>
+<p><div class="line">*/</div></p>
+<p><div class="line">FristCtrl:</div></p>
+<p><div class="line">func jump2Sec(){</div></p>
+<p><div class="line">let sec = Second()</div></p>
+<p><div class="line">sec.block = {( str:String)-() in</div></p>
+<p><div class="line">print(str)</div></p>
+<p><div class="line">}</div></p>
+<p><div class="line">self.navigationController?.pushViewController(sec, animated: true);</div></p>
+<p><div class="line">}</div></p>
+<p><div class="line"></div></p>
+<p><div class="line">SecondCtrl:</div></p>
+<p><div class="line">//定义闭包</div></p>
+<p><div class="line">var block :((str)-&gt;Void)?</div></p>
+<p><div class="line">//使用闭包:</div></p>
+<p><div class="line">func jump2Fri(){</div></p>
+<p><div class="line">//label 是我定义的一个 UITextField</div></p>
+<p><div class="line">block?(str:label.text!)</div></p>
+<p><div class="line">self.navigationController?.popViewControllerAnimated(true)</div></p>
+<p><div class="line">}</div><br><br><br><br>3.Map:<br>好熟悉的感觉,我一定是在 <code>python</code>里面用到过</p>
+<p><figure class="highlight plain"></figure></p>
+<p><table></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td class="gutter"></td></p>
+<p><div class="line">1</div></p>
+<p><div class="line">2</div></p>
+<p><div class="line">3</div></p>
+<p><div class="line">4</div></p>
+<p><div class="line">5</div></p>
+<p><div class="line">6</div></p>
+<p><div class="line">7</div></p>
+<p><div class="line">8</div></p>
+<p><div class="line">9</div></p>
+<p><td class="code"></td></p>
+<p><div class="line">//定义一个数组</div></p>
+<p><div class="line">let arr = [“许巍”,”郑钧”,”崔健”,”张楚”]</div></p>
+<p><div class="line">var arrMap = arr.map { (element:String) -&gt; String in</div></p>
+<p><div class="line">return “摇滚老炮:(element)”</div></p>
+<p><div class="line">}</div></p>
+<p><div class="line">print(arr)</div></p>
+<p><div class="line">//[“许巍”, “郑钧”, “崔健”, “张楚”]</div></p>
+<p><div class="line">print(arrMap)</div></p>
+<p><div class="line">//[“摇滚老炮:许巍”, “摇滚老炮:郑钧”, “摇滚老炮:崔健”, “摇滚老炮:张楚”]</div><br><br><br><br>可以看到 map 的功能就是遍历数组中的每一个元素,然后对元素进行处理;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/uisearchcontroller-e7-9a-84-e4-bd-bf-e7-94-a8/" rel="next" title="UISearchController的使用">
+                <i class="fa fa-chevron-left"></i> UISearchController的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/328-2/" rel="prev" title="iOS设计模式之单例">
+                iOS设计模式之单例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="两好三坏" />
+          <p class="site-author-name" itemprop="name">两好三坏</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用："><span class="nav-number">1.</span> <span class="nav-text">使用：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">两好三坏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
