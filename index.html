@@ -277,6 +277,150 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/UITableview性能优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/25/UITableview性能优化/" itemprop="url">UITableview性能优化</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T08:24:34+08:00">
+                2018-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS-开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>UItableview 是 iOS 开发中最常用的 ui 控件之一,也是最常出现的控件之一; 常常负责一些列表数据的渲染,因此对 UITablevie 进行性能优化是很有必要的; </p>
+<h3 id="1-cell-重用"><a href="#1-cell-重用" class="headerlink" title="1 cell 重用"></a>1 cell 重用</h3><h4 id="1-1-数据源方法优化"><a href="#1-1-数据源方法优化" class="headerlink" title="1.1 数据源方法优化"></a>1.1 数据源方法优化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;</div></pre></td></tr></table></figure>
+<p>每次刷新都去创建新的 cell, 性能; 我们会传建一个静态的变量来作为标识符去创建 cell, 每个 cell 都会注册一个标识符,放入缓存中,如果需要调用,就从缓存池中找到对应的 id, 只有一处屏幕的 cell 才会被放入缓存中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">static NSString *resuseID = @&quot;CellID&quot;;</div><div class="line">UITableviewCell *cell= [tableview dequeueReusableCellWithIdentifier:resuseID];</div></pre></td></tr></table></figure>
+<h4 id="1-2-缓存池的实现"><a href="#1-2-缓存池的实现" class="headerlink" title="1.2 缓存池的实现"></a>1.2 缓存池的实现</h4><p>当 cell 要初始化的时候, tableview 会在堆中开辟内存为 cell 缓存使用. cell 的重用通过 identifier 标识不同类型的 cell,</p>
+<h4 id="1-3-缓存池取出可重用-cell-两种方法的区别"><a href="#1-3-缓存池取出可重用-cell-两种方法的区别" class="headerlink" title="1.3 缓存池取出可重用 cell 两种方法的区别"></a>1.3 缓存池取出可重用 cell 两种方法的区别</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> //  这个方法会查询可重用Cell，如果注册了原型Cell，能够查询到，否则，返回nil；而且需要判断if（cell == nil），才会创建Cell，不推荐</div><div class="line"></div><div class="line">-(nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier; </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">//   使用这个方法之前，必须通过xib（storyboard）或是Class（纯代码）注册可重用Cell，而且这个方法一定会返回一个Cell</div><div class="line">-(__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(6_0);</div><div class="line"></div><div class="line">//注册 cell</div><div class="line">- (void)registerNib:(nullable UINib *)nib forCellReuseIdentifier:(NSString *)identifier NS_AVAILABLE_IOS(5_0);</div><div class="line">- (void)registerClass:(nullable Class)cellClass forCellReuseIdentifier:(NSString *)identifier NS_AVAILABLE_IOS(6_0);</div></pre></td></tr></table></figure>
+<h3 id="2-定义尽量少类型的-cell-以及善用-hidden-隐藏或者显示-subviews"><a href="#2-定义尽量少类型的-cell-以及善用-hidden-隐藏或者显示-subviews" class="headerlink" title="2 定义尽量少类型的 cell 以及善用 hidden 隐藏或者显示 subviews"></a>2 定义尽量少类型的 cell 以及善用 hidden 隐藏或者显示 subviews</h3><h4 id="2-1定义一种类型的-cell"><a href="#2-1定义一种类型的-cell" class="headerlink" title="2.1定义一种类型的 cell"></a>2.1定义一种类型的 cell</h4><p>​    分析 cell 的结构,尽量将相同内容抽取到一种样式 cell 中,前面已经说到了 cell 的重用机制,同种类型保证重用</p>
+<h4 id="2-2-善用-hidden-去显示或者隐藏-subviews"><a href="#2-2-善用-hidden-去显示或者隐藏-subviews" class="headerlink" title="2.2  善用 hidden 去显示或者隐藏 subviews"></a>2.2  善用 hidden 去显示或者隐藏 subviews</h4><p>​    与2.1对应</p>
+<h3 id="3-提前计算并缓存-cell-的高度"><a href="#3-提前计算并缓存-cell-的高度" class="headerlink" title="3 提前计算并缓存 cell 的高度"></a>3 提前计算并缓存 cell 的高度</h3><p> 在iOS中，不设UITableViewCell的预估行高的情况下，会优先调用”tableView:heightForRowAtIndexPath:”方法，获取每个Cell的即将显示的高度，从而确定UITableView的布局，实际就是要获取contentSize（UITableView继承自UIScrollView,只有获取滚动区域，才能实现滚动）,然后才调用”tableView:cellForRowAtIndexPath”,获取每个Cell，进行赋值. 如果项目中 cell 比较多,是非常影响性能的; 可以使用<strong>UITableView-FDTemplateLayoutCell</strong> 去计算 cell 的高度,以及缓存</p>
+<h3 id="4-异步绘制"><a href="#4-异步绘制" class="headerlink" title="4 异步绘制"></a>4 异步绘制</h3><p>减少cell 在主线程的时间消耗,异步渲染视图, 如果图片较多,可以使用预渲染技术</p>
+<h3 id="5-按需加载"><a href="#5-按需加载" class="headerlink" title="5 按需加载"></a>5 按需加载</h3><p>使用 scrollview 的代理方法进行判断, 当 tableview 静止或者滑动减速的时候进行异步加载,之家在目标范围内的 cell; 减少了无关的性能损耗;</p>
+<h3 id="6-减少动态添加-subviews"><a href="#6-减少动态添加-subviews" class="headerlink" title="6 减少动态添加 subviews"></a>6 减少动态添加 subviews</h3><h3 id="7-减少-cell-子视图的绘制"><a href="#7-减少-cell-子视图的绘制" class="headerlink" title="7 减少 cell 子视图的绘制"></a>7 减少 cell 子视图的绘制</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/Python之美/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1578,184 +1722,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/小程序练手项目之三/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="两好三坏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="两好三坏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/10/小程序练手项目之三/" itemprop="url">小程序练手项目之三</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T21:11:51+08:00">
-                2017-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>每一个页面下对应配置的<code>json</code>,  但是只有<code>app.json</code> 文件可以配置 <code>page</code>这个数组,     页面下对应的<code>json</code>文件只能放置 <code>window</code> 配置项’</li>
-</ul>
-<p>window数组的配置项:</p>
-<ul>
-<li>navigationBarBackgroundColor    HexColor    #000000    导航栏背景颜色，如”#000000”</li>
-<li>navigationBarTextStyle    String    white    导航栏标题颜色，仅支持 black/white</li>
-<li>navigationBarTitleText    String        导航栏标题文字内容</li>
-<li>backgroundColor    HexColor    #ffffff    窗口的背景色</li>
-<li>backgroundTextStyle    String    dark    下拉背景字体、loading 图的样式，仅支持 dark/light</li>
-<li>enablePullDownRefresh    Boolean    false    是否开启下拉刷新，详见页面相关事件处理函数。</li>
-<li>onReachBottomDistance</li>
-</ul>
-<p>tabbar 数组配置项</p>
-<ul>
-<li>color    HexColor    是        tab 上的文字默认颜色</li>
-<li>selectedColor    HexColor    是        tab 上的文字选中时的颜色</li>
-<li>backgroundColor    HexColor    是        tab 的背景色</li>
-<li>borderStyle    String    否    black    tabbar上边框的颜色， 仅支持 black/white</li>
-<li>list    Array    是        tab 的列表，详见 list 属性说明，最少2个、最多5个 tab</li>
-<li>position    String    否    bottom    可选值 bottom、top</li>
-</ul>
-<p>其中 list 接受一个数组，数组中的每个项都是一个对象，其属性值如下：</p>
-<pre><code>属性    类型    必填    说明
-</code></pre><ul>
-<li>pagePath    String    是    页面路径，必须在 pages 中先定义</li>
-<li>text    String    是    tab 上按钮文字</li>
-<li>iconPath    String    否    图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px，当 postion 为 top 时，此参数无效</li>
-<li>selectedIconPath    String    否    选中时的图片路径，icon 大小限制为40kb，建议尺寸为 81px * 81px ，当 postion 为 top 时，此参数无效</li>
-</ul>
-<p><img src="http://7xujya.com1.z0.glb.clouddn.com/FodsDIB5D_QpwLIbplYEs0GDK_dU" alt="Tabbar"></p>
-<p>networkTimeout数组配置项 可以设置各种网络请求的超时时间。</p>
-<p>属性说明：</p>
-<p>属性    类型    必填    说明</p>
-<ul>
-<li>request    Number    否    wx.request的超时时间，单位毫秒，默认为：60000</li>
-<li>connectSocket    Number    否    wx.connectSocket的超时时间，单位毫秒，默认为：60000</li>
-<li>uploadFile    Number    否    wx.uploadFile的超时时间，单位毫秒，默认为：60000</li>
-<li>downloadFile    Number    否    wx.downloadFile的超时时间，单位毫秒，默认为：60000</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1800,7 +1771,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
