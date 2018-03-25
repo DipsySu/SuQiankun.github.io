@@ -277,6 +277,152 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/12/小程序练手项目之五抽取模板/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="两好三坏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="两好三坏">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/12/小程序练手项目之五抽取模板/" itemprop="url">小程序练手项目之五抽取模板</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T19:01:44+08:00">
+                2017-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>做过前端或者手机端的朋友都知道, 前后台交互使用json’或者xml数据 ; </p>
+<p>上一篇文章我将文章列表的内容嵌套在了wxml文件中., 其实这样不对, 在前端代码中操作dom,给元素节点添加内容; </p>
+<p>在微信小程序中也是一样, 使用小程序提供的模板对界面内容进行赋值操作;</p>
+<p>微信提供了一系列的方法对数据进行渲染,数据绑定,列表循环,条件判断,模板,shi事件,引用等等,方便开发者快速上手进行开发;;</p>
+<!--mroe-->
+<p>我们可以把上一届的代码进行抽取,使用列表循环对数据进行渲染;</p>
+<p>例如我们创建一个数组,里面放置我们需要设置的<code>json</code>数据, </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var testjson = [</div><div class="line">    &#123;</div><div class="line">      title:&quot;两好三坏&quot;,</div><div class="line">      content:&quot;世界上最美好的爱情就是我爱你的时候你刚刚好也爱我&quot;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      title:&quot;枕边书&quot;,</div><div class="line">      content:&quot;我愿意做你手边的玫瑰&quot;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      title: &quot;意中人&quot;,</div><div class="line">      content: &quot;我愿意做你坟墓上的魂&quot;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      title: &quot;青玉锦绣&quot;,</div><div class="line">      content: &quot;君问归期未有期,却话巴山夜雨时&quot;,</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">  ];</div></pre></td></tr></table></figure>
+<p>然后在页面加载的函数中给<code>Page</code>的<code>data</code>设置数据,  微信提供了一个方法用于给data数组赋值;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">this.setData(&#123;</div><div class="line">	infojson:testjson</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>然后是在页面中使用 列表循环对页面进行数据渲染</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;block wx:for=&quot;&#123;&#123;infojson&#125;&#125;&quot; wx:for-item=&quot;item&quot; &gt;</div><div class="line"></div><div class="line">  &lt;view class=&apos;post-container&apos; bindtap=&apos;touchInfo&apos;&gt;</div><div class="line"></div><div class="line">    &lt;view class=&apos;post-author-data&apos;&gt;</div><div class="line">      &lt;image class=&apos;post-author&apos; src=&apos;../images/2.png&apos;&gt;&lt;/image&gt;</div><div class="line">      &lt;text class=&apos;post-data&apos;&gt;2017-10-10&lt;/text&gt;</div><div class="line">    &lt;/view&gt;</div><div class="line"></div><div class="line">    &lt;text class=&apos;post-title&apos;&gt;&#123;&#123;item.title&#125;&#125;&lt;/text&gt;</div><div class="line">    &lt;image class=&apos;post-image&apos; src=&apos;../images/a.png&apos; &gt;&lt;/image&gt;</div><div class="line">    &lt;text &gt;&#123;&#123;item.content&#125;&#125;&lt;/text&gt;</div><div class="line">    </div><div class="line">    &lt;view class=&apos;post-like&apos;&gt;</div><div class="line">      &lt;image class=&apos;post-like-images&apos; src=&apos;../images/chat.png&apos;&gt;&lt;/image&gt;</div><div class="line">      &lt;text class=&apos;post-like-font&apos;&gt;92&lt;/text&gt;</div><div class="line">      &lt;image class=&apos;post-like-images&apos; src=&apos;../images/chat1.png&apos;&gt;&lt;/image&gt;</div><div class="line">      &lt;text class=&apos;post-like-font&apos;&gt;66&lt;/text&gt;</div><div class="line">    &lt;/view&gt;</div><div class="line">  &lt;/view&gt;</div><div class="line">&lt;/block&gt;</div></pre></td></tr></table></figure>
+<p>这样就好了, 以后还会将文章列表抽成template; </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/11/小程序项目之四文章列表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1631,145 +1777,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/mui控件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="两好三坏">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="两好三坏">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/02/mui控件/" itemprop="url">mui控件(一)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-02T13:55:12+08:00">
-                2017-10-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/混合开发/" itemprop="url" rel="index">
-                    <span itemprop="name">混合开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>mui 是一款最接近原生App体验的高性能前端框架, 性能上避免了浏览器切页白屏,卡顿的转场动画,视觉上定制了很多精美漂亮类似安卓和iOS原生的基础控件;</p>
-<p>比如原生控件库中存在的 <code>accordion 折叠面板</code> , <code>actionsheet 操作表</code>,     <code>badges 数字角标</code> , <code>button 定制按钮</code> ,  <code>cardview 卡片视图</code> 等系列基础控件</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/02/mui控件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1819,7 +1826,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

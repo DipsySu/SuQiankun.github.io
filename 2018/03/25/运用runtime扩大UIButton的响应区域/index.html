@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="闲话," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="我叫秋水，取自庄子第一章，秋水。秋水时至，百川灌河，径流之大，两涘渚崖之间不辩牛马。如果断章取义，可以这样理解：秋水来了，百川东到海，泥沙之间连牛马都不可辨认。再异意，我来了，众人都指鹿为马了。但我觉得秋水这个名字俊秀飘逸，充满浪漫主义。我便自觉地去掉了异意这层意思。">
-<meta name="keywords" content="闲话">
+<meta name="description" content="在日常开发中, 设计师有时候会设计一个看起来小小的按钮, 用户很难点击到这个按钮; 为了解决这个问题,简单粗暴的就是将 button 的 frame 放大, 分别调整button的 frame 和显示内容的 frame ,即麻烦,又显得怪异;如果我们使用 runtime 关联对象的方法对 button 进行扩展,去扩大 UIButton 的可交互区域,这样会更好一点 ​     其执行原理为：OC">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="喜悦">
-<meta property="og:url" content="http://yoursite.com/2016/12/29/e5-96-9c-e6-82-a6/index.html">
+<meta property="og:title" content="运用runtime扩大UIButton的响应区域">
+<meta property="og:url" content="http://yoursite.com/2018/03/25/运用runtime扩大UIButton的响应区域/index.html">
 <meta property="og:site_name" content="两好三坏">
-<meta property="og:description" content="我叫秋水，取自庄子第一章，秋水。秋水时至，百川灌河，径流之大，两涘渚崖之间不辩牛马。如果断章取义，可以这样理解：秋水来了，百川东到海，泥沙之间连牛马都不可辨认。再异意，我来了，众人都指鹿为马了。但我觉得秋水这个名字俊秀飘逸，充满浪漫主义。我便自觉地去掉了异意这层意思。">
-<meta property="og:updated_time" content="2017-06-20T09:06:19.000Z">
+<meta property="og:description" content="在日常开发中, 设计师有时候会设计一个看起来小小的按钮, 用户很难点击到这个按钮; 为了解决这个问题,简单粗暴的就是将 button 的 frame 放大, 分别调整button的 frame 和显示内容的 frame ,即麻烦,又显得怪异;如果我们使用 runtime 关联对象的方法对 button 进行扩展,去扩大 UIButton 的可交互区域,这样会更好一点 ​     其执行原理为：OC">
+<meta property="og:updated_time" content="2018-03-25T02:11:22.991Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="喜悦">
-<meta name="twitter:description" content="我叫秋水，取自庄子第一章，秋水。秋水时至，百川灌河，径流之大，两涘渚崖之间不辩牛马。如果断章取义，可以这样理解：秋水来了，百川东到海，泥沙之间连牛马都不可辨认。再异意，我来了，众人都指鹿为马了。但我觉得秋水这个名字俊秀飘逸，充满浪漫主义。我便自觉地去掉了异意这层意思。">
+<meta name="twitter:title" content="运用runtime扩大UIButton的响应区域">
+<meta name="twitter:description" content="在日常开发中, 设计师有时候会设计一个看起来小小的按钮, 用户很难点击到这个按钮; 为了解决这个问题,简单粗暴的就是将 button 的 frame 放大, 分别调整button的 frame 和显示内容的 frame ,即麻烦,又显得怪异;如果我们使用 runtime 关联对象的方法对 button 进行扩展,去扩大 UIButton 的可交互区域,这样会更好一点 ​     其执行原理为：OC">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/29/e5-96-9c-e6-82-a6/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/25/运用runtime扩大UIButton的响应区域/"/>
 
 
 
 
 
-  <title>喜悦 | 两好三坏</title>
+  <title>运用runtime扩大UIButton的响应区域 | 两好三坏</title>
   
 
 
@@ -280,7 +280,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/e5-96-9c-e6-82-a6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/运用runtime扩大UIButton的响应区域/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="两好三坏">
@@ -297,7 +297,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">喜悦</h2>
+          <h2 class="post-title" itemprop="name headline">运用runtime扩大UIButton的响应区域</h2>
         
 
         <div class="post-meta">
@@ -309,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-29T13:23:48+08:00">
-                2016-12-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T09:47:55+08:00">
+                2018-03-25
               </time>
             
 
@@ -332,8 +332,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/夜炉诗话/" itemprop="url" rel="index">
-                    <span itemprop="name">夜炉诗话</span>
+                  <a href="/categories/iOS-开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS 开发</span>
                   </a>
                 </span>
 
@@ -366,19 +366,19 @@
       
 
       
-        <div>　我叫秋水，取自庄子第一章，秋水。秋水时至，百川灌河，径流之大，两涘渚崖之间不辩牛马。如果断章取义，可以这样理解：秋水来了，百川东到海，泥沙之间连牛马都不可辨认。再异意，我来了，众人都指鹿为马了。但我觉得秋水这个名字俊秀飘逸，充满浪漫主义。我便自觉地去掉了异意这层意思。</div><br><div></div>
-
-<a id="more"></a>
-<p>抛开名字不谈，我这人不怎么喜欢秋天。我曾经盼望过春天，夏天，冬天，唯独没有期盼过秋天。大概是因为一些人有那一种伤秋情节。好像所有伤心的事儿都发生在了秋天。看吧，悲哉秋之为气也！萧瑟兮草木摇落而变衰，憭栗兮若在远行，登山临水兮送将归。寒城一以眺，平楚正苍然 。树树秋声，山山寒色。且不说江淹的别赋写得多么黯然销魂了，单看上面的那几句，句句都充斥着悲哉、寒、别、怆然之类的词语。</p>
-<p>看吧，我就是这么不喜欢秋天。</p>
-<p>我愿意叫做秋水，但我不喜欢秋天。</p>
-<p>那就听听春雨吧，看那打天上洒下来的一丝丝钻进你的脖颈。惊蛰一过，春寒加剧。雨季就开始连绵不绝淅淅沥沥淋淋不绝。携着纸伞躲过这一阵悄然而至的雨，却仍然躲不过这雨季。湿润的空气氤氲着雾气让人想入非非。隔着藏青色的山透着天青色的云，一场又一场的春雨淋漓而过。</p>
-<p>水向东流，时间怎么偷？</p>
-<p>花开就一次成熟我却错过。</p>
-<p>我记得那个时候我们停留在周围朦胧的黑暗里，周围的声音 从脚下流淌，仿佛上好的檀香，没有一丝的飞扬，缓缓的流动，游折，渗透我们的躯体，每一个举手，每一个投足，每一个眼波流转，每一个笑涡，仿佛都受到一种极为柔软的阻隔，也越发的变得温柔。全部的身心投放在这流动的液体，好像春雨浸润土地，一举一动透着一股子异样。去试着想象一下吧，你的手静静的滑过另一只手，这一只手与你的手又决然不同，你的手悄然拢过她柔软的身子，感受着她的温香暖玉。</p>
-<p>还有余下的喜悦，这种喜悦 就像夏夜空中的银河乍泄，噼里啪啦的投射下水银似的光。</p>
-<p>峰回路转不见君，雪上空留马行处 。</p>
-<p>如果我们的生活中没有一夜醒来发现窗外沉寂了整个冬天的柳枝舒展开来了几支嫩芽，如果没有淅淅沥沥夜雨中中的远处昏黄的几盏灯火，如果没有在你失意怆然而暗自销魂时从远方飘来的粉色信笺上姑娘娟秀的字体告诉你她一直在默默关注并喜欢着你。如果我们没有这种种欢喜，我们该怎么在这漫长的岁月中渡过这样一个接一个漫长的明天。</p>
+        <p>在日常开发中, 设计师有时候会设计一个看起来小小的按钮, 用户很难点击到这个按钮; 为了解决这个问题,简单粗暴的就是将 button 的 frame 放大, 分别调整button的 frame 和显示内容的 frame ,即麻烦,又显得怪异;如果我们使用 runtime 关联对象的方法对 button 进行扩展,去扩大 UIButton 的可交互区域,这样会更好一点</p>
+<p>​     其执行原理为：OC中创建类别(Categroy)的方式，并不允许给已有的类扩展属性，只可以给其扩展方法。所以，需要使用Runtime“黑魔法”中的关联对象(Associative Object)的一些方法，动态地为某个button对象添加扩展距离的属性，然后检测UITouch事件的触摸点是否在我们扩展距离后Rect内，从而达到想要的效果。</p>
+<p>​       首先，创建一个UIButton的Category，起名为EnlargeTouchArea，设置一个外界可访问的方法setEnlaEdgeWithTop:right:bottom:left，在使用时也只需使用这个方法即可，传入的四个参数分别是上、右、下、左的扩展距离。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//  UIButton+EnlargeTouchArea.h  </div><div class="line">  </div><div class="line">#import &lt;Foundation/Foundation.h&gt;  </div><div class="line">#import &lt;UIKit/UIKit.h&gt;  </div><div class="line">  </div><div class="line">@interface UIButton (EnlargeTouchArea)  </div><div class="line">  </div><div class="line">- (void)setEnlargeEdgeWithTop:(CGFloat) top right:(CGFloat) right bottom:(CGFloat) bottom left:(CGFloat) left;  </div><div class="line">  </div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>​        然后导入<objc runtime.h="">，所有Runtime的黑魔法都在这里</objc></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//  UIButton+EnlargeTouchArea.m  </div><div class="line">  </div><div class="line">#import &quot;UIButton+EnlargeTouchArea.h&quot;  </div><div class="line">  </div><div class="line">#import &lt;objc/runtime.h&gt;  </div><div class="line">@implementation UIButton (EnlargeTouchArea)  </div><div class="line">  </div><div class="line">  </div><div class="line">static char topNameKey;  </div><div class="line">static char rightNameKey;  </div><div class="line">static char bottomNameKey;  </div><div class="line">static char leftNameKey;</div></pre></td></tr></table></figure>
+<p>objc_setAssociatedObject是一个C语言函数，这个函数被称之为“关联API”，它的作用是把top、right、bottom、left这四个从外界获取到的值与本类(self)关联起来，然后设置一个static char作为能够找到他们的Key</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (void) setEnlargeEdgeWithTop:(CGFloat) top right:(CGFloat) right bottom:(CGFloat) bottom left:(CGFloat) left  </div><div class="line">&#123;  </div><div class="line">    objc_setAssociatedObject(self, &amp;topNameKey, [NSNumber numberWithFloat:top], OBJC_ASSOCIATION_COPY_NONATOMIC);  </div><div class="line">    objc_setAssociatedObject(self, &amp;rightNameKey, [NSNumber numberWithFloat:right], OBJC_ASSOCIATION_COPY_NONATOMIC);  </div><div class="line">    objc_setAssociatedObject(self, &amp;bottomNameKey, [NSNumber numberWithFloat:bottom], OBJC_ASSOCIATION_COPY_NONATOMIC);  </div><div class="line">    objc_setAssociatedObject(self, &amp;leftNameKey, [NSNumber numberWithFloat:left], OBJC_ASSOCIATION_COPY_NONATOMIC);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>bjc_getAssociatedObject同样也是一个关联API(c语言函数)，它可以通过刚刚设置的Key找到上个方法中从外界传入的top、right、bottom、left，这个api和obj_setAssociatedObject一起使用就可以达到给已有类扩展属性的效果。最后我们通过self.bounds设置一个新的CGRect，作为扩大后的点按区域，并且返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (CGRect) enlargedRect  </div><div class="line">&#123;  </div><div class="line">    NSNumber* topEdge = objc_getAssociatedObject(self, &amp;topNameKey);  </div><div class="line">    NSNumber* rightEdge = objc_getAssociatedObject(self, &amp;rightNameKey);  </div><div class="line">    NSNumber* bottomEdge = objc_getAssociatedObject(self, &amp;bottomNameKey);  </div><div class="line">    NSNumber* leftEdge = objc_getAssociatedObject(self, &amp;leftNameKey);  </div><div class="line">    if (topEdge &amp;&amp; rightEdge &amp;&amp; bottomEdge &amp;&amp; leftEdge)  </div><div class="line">    &#123;  </div><div class="line">        return CGRectMake(self.bounds.origin.x - leftEdge.floatValue,  </div><div class="line">                          self.bounds.origin.y - topEdge.floatValue,  </div><div class="line">                          self.bounds.size.width + leftEdge.floatValue + rightEdge.floatValue,  </div><div class="line">                          self.bounds.size.height + topEdge.floatValue + bottomEdge.floatValue);  </div><div class="line">    &#125;  </div><div class="line">    else  </div><div class="line">    &#123;  </div><div class="line">        return self.bounds;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​       这个方法UIView的一个实例方法，作用是，捕获当前的UITouch事件中的触摸点，检测它是否在最上层的子视图内，如果不是的话就递归检测其父视图。这样的话，我们就只是将当前某一个触摸的point与某一个rect进行比较，并没有改变Button真实的frame，从而真正的从逻辑上达到了只是扩大点按区域的效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1. - (UIView) hitTest:(CGPoint) point withEvent:(UIEvent) event  </div><div class="line">2. &#123;  </div><div class="line">3.     CGRect rect = [self enlargedRect];  </div><div class="line">4.     if (CGRectEqualToRect(rect, self.bounds))  </div><div class="line">5.     &#123;  </div><div class="line">6.         return [super hitTest:point withEvent:event];  </div><div class="line">7.     &#125;  </div><div class="line">8.     return CGRectContainsPoint(rect, point) ? self : nil;  </div><div class="line">9. &#125;</div></pre></td></tr></table></figure>
+<p>​        总结一下，为什么要用runtime去为已有类达到一个扩展属性的效果呢，正是因为上面这个方法，这个系统提供的方法并没有提供接受其他参数的地方，而我们却必须要指定一个扩大的区域作为参数，所以就必须为这个类扩展一个新的属性。</p>
 
       
     </div>
@@ -408,7 +408,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/闲话/" rel="tag"># 闲话</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
       
@@ -421,8 +421,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/29/ios-e5-93-8d-e5-ba-94-e8-80-85-e9-93-be-e6-9d-a1-e4-ba-8b-e4-bb-b6-e5-a4-84-e7-90-86/" rel="next" title="iOS 响应者链条;事件处理">
-                <i class="fa fa-chevron-left"></i> iOS 响应者链条;事件处理
+              <a href="/2018/03/25/热风-鲁迅/" rel="next" title="热风-鲁迅">
+                <i class="fa fa-chevron-left"></i> 热风-鲁迅
               </a>
             
           </div>
@@ -430,10 +430,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/29/e4-b8-87-e7-89-a9-e7-94-9f-e9-95-bf/" rel="prev" title="万物生长">
-                万物生长 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
